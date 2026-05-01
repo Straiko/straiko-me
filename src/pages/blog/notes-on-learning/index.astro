@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const post = {
+  title: "Notes on Learning",
+  description: "What I've learned over years of self-education.",
+  pubDate: new Date("2026-04-20"),
+  tags: ["learning"]
+};
+---
+
+<BaseLayout lang="en" title={post.title} description={post.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      <a href={`${import.meta.env.BASE_URL}`} class="back-link">← Back to main</a>
+      <h1 class="post-title">{post.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.pubDate.toISOString()}>
+          {post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <div class="post-tags">
+          {post.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <img src={`${import.meta.env.BASE_URL}/blog/hero-learning.svg`} alt="Learning illustration" class="post-hero" />
+    </header>
+
+    <div class="post-content">
+      <p>Self-education is a skill. Like any skill, it gets better with practice.</p>
+
+      <p>Here's what I've learned after years of teaching myself programming, design, and other things.</p>
+
+      <h2>1. Learn by building</h2>
+
+      <p>Tutorials are useful for syntax. But real learning happens when you build something without a guide.</p>
+
+      <p>The moment you get stuck and have to figure it out yourself — that's when you actually learn.</p>
+
+      <h2>2. Small, consistent effort beats bursts</h2>
+
+      <p>30 minutes every day is better than 5 hours once a week.</p>
+
+      <p>Consistency builds momentum. Bursts burn you out.</p>
+
+      <h2>3. Teach to learn</h2>
+
+      <p>If you can't explain it simply, you don't understand it well enough.</p>
+
+      <p>Writing blog posts, answering questions, or just explaining concepts to yourself forces you to clarify your thinking.</p>
+
+      <h2>4. Focus on fundamentals</h2>
+
+      <p>Frameworks change. Fundamentals don't.</p>
+
+      <p>Learn how things work under the hood. The rest is just syntax.</p>
+
+      <h2>5. Don't wait to feel ready</h2>
+
+      <p>You'll never feel ready. Start anyway.</p>
+
+      <p>The best time to start was yesterday. The second best time is now.</p>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const post = {
+  title: "Начало работы с Astro",
+  description: "Первые шаги в создании сайта на Astro.",
+  pubDate: new Date("2026-04-18"),
+  tags: ["веб-разработка", "astro"]
+};
+---
+
+<BaseLayout lang="ru" title={post.title} description={post.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      <a href={`${import.meta.env.BASE_URL}/ru/`} class="back-link">← Вернуться в главное меню</a>
+      <h1 class="post-title">{post.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.pubDate.toISOString()}>
+          {post.pubDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <div class="post-tags">
+          {post.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <img src={`${import.meta.env.BASE_URL}/blog/hero-astro.svg`} alt="Иллюстрация Astro" class="post-hero" />
+    </header>
+
+    <div class="post-content">
+      <p>Недавно я переделал свой сайт-портфолио на Astro, и это был отличный опыт.</p>
+
+      <h2>Почему Astro?</h2>
+
+      <p>Astro — это современный генератор статических сайтов, который по умолчанию не отправляет JavaScript. Это делает сайты невероятно быстрыми.</p>
+
+      <p>Вы всё ещё можете использовать свой любимый фреймворк (React, Vue, Svelte) для интерактивных компонентов, но только когда они вам нужны.</p>
+
+      <h2>Начало работы</h2>
+
+      <p>Настроить новый проект Astro просто:</p>
+
+      <pre><code>npm create astro@latest
+cd my-project
+npm run dev</code></pre>
+
+      <p>Вот и всё. Теперь у вас есть рабочий сайт на Astro, запущенный на localhost:4321.</p>
+
+      <h2>Что мне нравится</h2>
+
+      <ul>
+        <li><strong>Быстро по умолчанию</strong> — Никакого JavaScript, если вы явно его не добавите</li>
+        <li><strong>Простой синтаксис</strong> — .astro файлы — это просто HTML с суперспособностями</li>
+        <li><strong>Отличный DX</strong> — Горячая перезагрузка, поддержка TypeScript и отличная документация</li>
+        <li><strong>Независимость от фреймворков</strong> — Используйте React, Vue, Svelte или простой HTML</li>
+      </ul>
+
+      <h2>Идеально для</h2>
+
+      <p>Astro идеален для сайтов, ориентированных на контент: блоги, портфолио, документация, маркетинговые страницы.</p>
+
+      <p>Если вы создаёте высоко интерактивное приложение, вам может понадобиться что-то другое. Но для статических сайтов? Astro сложно превзойти.</p>
+    </div>
+  </article>
+</BaseLayout>

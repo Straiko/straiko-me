@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import { profile } from "../content/profile";
+
+type Props = {
+  title: string;
+  description?: string;
+  lang?: "ru" | "en";
+  image?: string;
+};
+
+const { title, description, lang = "ru", image } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
+const withBase = (p) => `${baseNoTrail}${p}`;
+
+const pathname = Astro.url.pathname;
+const pathNoBase = baseNoTrail && pathname.startsWith(baseNoTrail) ? (pathname.slice(baseNoTrail.length) || "/") : pathname;
+
+const isEn = lang === "en" || pathNoBase.startsWith("/en");
+const otherLocalePathNoBase = isEn
+  ? pathNoBase.replace(/^\/en(\/|$)/, "/")
+  : pathNoBase === "/"
+    ? "/en/"
+    : `/en${pathNoBase}`;
+const otherLocalePath = withBase(otherLocalePathNoBase);
+const localeLabel = isEn ? "RU" : "EN";
+
+const siteUrl = Astro.site || "https://straiko.me";
+const canonicalURL = new URL(pathname, siteUrl).href;
+const ogImage = image || withBase("/og-image.jpg");
+const ogDescription = description || (isEn ? `${profile.tagline.en} · ${profile.subtitle.en}` : `${profile.tagline.ru} · ${profile.subtitle.ru}`);
+---
+
+<html lang={isEn ? "en" : "ru"}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    <link rel="icon" href={withBase("/favicon.ico")} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description ? <meta name="description" content={description} /> : null}
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+    <meta property="og:locale" content={isEn ? "en_US" : "ru_RU"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+
+    <!-- Additional SEO -->
+    <meta name="author" content={profile.fullName} />
+    <meta name="robots" content="index, follow" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

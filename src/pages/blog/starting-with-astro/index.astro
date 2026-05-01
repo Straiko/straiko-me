@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const post = {
+  title: "Getting Started with Astro",
+  description: "First steps in building a site with Astro.",
+  pubDate: new Date("2026-04-18"),
+  tags: ["web-dev", "astro"]
+};
+---
+
+<BaseLayout lang="en" title={post.title} description={post.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      <a href={`${import.meta.env.BASE_URL}`} class="back-link">← Back to main</a>
+      <h1 class="post-title">{post.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.pubDate.toISOString()}>
+          {post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <div class="post-tags">
+          {post.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <img src={`${import.meta.env.BASE_URL}/blog/hero-astro.svg`} alt="Astro illustration" class="post-hero" />
+    </header>
+
+    <div class="post-content">
+      <p>I recently rebuilt my portfolio site using Astro, and it's been a great experience.</p>
+
+      <h2>Why Astro?</h2>
+
+      <p>Astro is a modern static site generator that ships zero JavaScript by default. This makes sites incredibly fast.</p>
+
+      <p>You can still use your favorite framework (React, Vue, Svelte) for interactive components, but only when you need them.</p>
+
+      <h2>Getting started</h2>
+
+      <p>Setting up a new Astro project is simple:</p>
+
+      <pre><code>npm create astro@latest
+cd my-project
+npm run dev</code></pre>
+
+      <p>That's it. You now have a working Astro site running on localhost:4321.</p>
+
+      <h2>What I like</h2>
+
+      <ul>
+        <li><strong>Fast by default</strong> — No JavaScript unless you explicitly add it</li>
+        <li><strong>Simple syntax</strong> — .astro files are just HTML with superpowers</li>
+        <li><strong>Great DX</strong> — Hot reload, TypeScript support, and excellent docs</li>
+        <li><strong>Framework agnostic</strong> — Use React, Vue, Svelte, or plain HTML</li>
+      </ul>
+
+      <h2>Perfect for</h2>
+
+      <p>Astro is ideal for content-focused sites: blogs, portfolios, documentation, marketing pages.</p>
+
+      <p>If you're building a highly interactive app, you might want something else. But for static sites? Astro is hard to beat.</p>
+    </div>
+  </article>
+</BaseLayout>

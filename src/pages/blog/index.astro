@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog-en")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const base = import.meta.env.BASE_URL;
+const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
+const withBase = (p) => `${baseNoTrail}${p}`;
+const assetSrc = (src) => (src?.startsWith("/") ? withBase(src) : src);
+---
+
+<BaseLayout lang="en" title="Blog" description="Notes, opinions, and small write-ups.">
+	<header class="space-y-2">
+		<h1 class="text-3xl font-semibold tracking-tight">Blog</h1>
+		<p class="text-sm text-zinc-300">Notes, opinions, and small write-ups.</p>
+	</header>
+
+	<section class="mt-10 border-t border-zinc-800 pt-8">
+		<div class="space-y-8">
+			{posts.map((post) => (
+				<article class="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-5 transition hover:border-zinc-700">
+					{(() => {
+						const slug = (post.slug ?? post.id).replace(/\.mdx?$/i, "");
+						return (
+							<div class="grid gap-4 sm:grid-cols-[140px_1fr] sm:items-start">
+								{post.data.hero ? (
+									<a href={withBase(`/en/blog/${slug}/`)} class="block overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950/40">
+										<img src={assetSrc(post.data.hero.src)} alt={post.data.hero.alt} class="h-[90px] w-full object-cover sm:h-[110px]" loading="lazy" />
+									</a>
+								) : (
+									<div class="h-[90px] rounded-xl border border-dashed border-zinc-800 sm:h-[110px]" />
+								)}
+
+								<div class="min-w-0">
+									<div class="flex items-baseline justify-between gap-4">
+										<h2 class="text-base font-semibold tracking-tight">
+											<a class="link-muted" href={withBase(`/en/blog/${slug}/`)}>
+												{post.data.title}
+											</a>
+										</h2>
+										<time class="shrink-0 text-xs text-zinc-500" datetime={post.data.pubDate.toISOString()}>
+											{post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" })}
+										</time>
+									</div>
+									<p class="mt-2 text-sm text-zinc-300">{post.data.description}</p>
+									<div class="mt-3 flex flex-wrap gap-2">
+										{post.data.tags?.slice(0, 4).map((t) => (
+											<span class="rounded-full border border-zinc-800 px-2 py-0.5 text-[11px] text-zinc-300">{t}</span>
+										))}
+									</div>
+									<div class="mt-3">
+										<a class="link" href={withBase(`/en/blog/${slug}/`)}>read →</a>
+									</div>
+								</div>
+							</div>
+						);
+					})()}
+				</article>
+			))}
+		</div>
+	</section>
+</BaseLayout>
+

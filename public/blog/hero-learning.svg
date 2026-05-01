@@ -1,0 +1,39 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#09090B"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#g)"/>
+
+  <g opacity="0.35" filter="url(#soft)">
+    <circle cx="480" cy="520" r="220" fill="#1F2937"/>
+    <circle cx="1120" cy="360" r="260" fill="#27272A"/>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M320 620 C 460 520, 560 560, 700 460 C 840 360, 920 420, 1080 320 C 1220 235, 1320 260, 1440 210" stroke="#334155" stroke-width="3" fill="none"/>
+    <path d="M320 660 C 460 560, 560 600, 700 500 C 840 400, 920 460, 1080 360 C 1220 275, 1320 300, 1440 250" stroke="#1F2937" stroke-width="3" fill="none"/>
+
+    <g>
+      <circle cx="700" cy="460" r="8" fill="#A1A1AA"/>
+      <circle cx="1080" cy="320" r="8" fill="#A1A1AA"/>
+      <circle cx="920" cy="420" r="8" fill="#71717A"/>
+    </g>
+  </g>
+
+  <g opacity="0.9">
+    <text x="120" y="165" fill="#FAFAFA" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="54" font-weight="650">
+      Build -&gt; break -&gt; fix -&gt; write.
+    </text>
+    <text x="120" y="220" fill="#A1A1AA" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-size="28">
+      Learning compounds when you keep the loop small.
+    </text>
+  </g>
+</svg>
+

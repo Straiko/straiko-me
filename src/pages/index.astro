@@ -1,0 +1,235 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../content/profile";
+import { projects } from "../content/projects";
+
+// Blog posts
+const blogPosts = [
+  {
+    slug: "how-i-choose-projects",
+    title: "How I Choose Pet Projects",
+    description: "A bit of pragmatism to avoid wasting weekends on dead ideas.",
+    pubDate: "2026-04-22",
+    tags: ["career", "projects"]
+  },
+  {
+    slug: "notes-on-learning",
+    title: "Notes on Learning",
+    description: "What I've learned over years of self-education.",
+    pubDate: "2026-04-20",
+    tags: ["learning"]
+  },
+  {
+    slug: "starting-with-astro",
+    title: "Getting Started with Astro",
+    description: "First steps in building a site with Astro.",
+    pubDate: "2026-04-18",
+    tags: ["web-dev", "astro"]
+  }
+];
+---
+
+<BaseLayout lang="en" title={profile.fullName} description={`${profile.tagline.en} · ${profile.subtitle.en}`}>
+	<div class="home-container">
+		<!-- Hero Section -->
+		<section class="hero">
+			<header class="hero-header">
+				<div class="logo">straiko</div>
+				<div class="header-controls">
+					<a href={`${import.meta.env.BASE_URL}/ru/`} class="lang-toggle" aria-label="Switch to Russian">RU</a>
+					<button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
+			</header>
+
+			<div class="hero-profile">
+				<div class="profile-image-container">
+					<div class="profile-image">👤</div>
+				</div>
+				<div class="profile-text">
+					<h1 class="profile-name">{profile.fullName}</h1>
+					<div class="social-links">
+						{profile.links.map((l) => (
+							<a class="social-icon" href={l.href} target="_blank" rel="noreferrer" aria-label={l.label}>
+								{l.label}
+							</a>
+						))}
+					</div>
+					<p class="profile-role">{profile.tagline.en}</p>
+					<p class="profile-description">{profile.subtitle.en}</p>
+					<p class="profile-location">
+						<span class="location-icon">📍</span> {profile.location.en}
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bento Grid -->
+		<div class="bento-grid initial-state" id="bentoGrid">
+			<!-- About me folder -->
+			<div class="bento-item item-about folder-item" tabindex="0" data-folder="about">
+				<div class="folder-badge">About me</div>
+				<div class="preview-card-stack">
+					{profile.about.map((section) =>
+						section.items.map((item, i) => (
+							<div class={`preview-card item-card-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
+								<div style="font-size: 2rem;">{item.logo}</div>
+							</div>
+						))
+					)}
+				</div>
+			</div>
+
+			<!-- About me expanded content -->
+			<div class="folder-content about-content" id="aboutContent" style="display: none;">
+				<div class="content-grid">
+					{profile.about.map((section) => (
+						<div class="content-section">
+							<h3 class="section-title">{section.titleEn || section.title}</h3>
+							<div class="section-items">
+								{section.items.map((item) => (
+									<div class="content-card">
+										<div class="card-logo">{item.logo}</div>
+										<div class="card-text">
+											<h4 class="card-title">{item.name}</h4>
+											<p class="card-subtitle">{item.role.en}</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Projects folder -->
+			<div class="bento-item item-projects folder-item" tabindex="0" data-folder="projects">
+				<div class="folder-badge">Projects</div>
+				<div class="preview-card-stack">
+					{projects.slice(0, 2).map((p, i) => (
+						<div class={`preview-card item-project-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
+							<div style="font-size: 1.5rem;">💻</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Projects expanded content -->
+			<div class="folder-content projects-content" id="projectsContent" style="display: none;">
+				<div class="projects-list">
+					{projects.map((p) => (
+						<div class="project-item">
+							<div class="project-header">
+								<h3 class="project-title">{p.title}</h3>
+								{p.badge && <span class="project-badge">{p.badge}</span>}
+							</div>
+							<p class="project-description">{p.description.en}</p>
+							<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
+								{p.ctaLabel?.en ?? "open →"}
+							</a>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Blog folder -->
+			<div class="bento-item item-blog folder-item" tabindex="0" data-folder="blog">
+				<div class="folder-badge">Blog</div>
+				<div class="preview-card-stack">
+					<div class="preview-card item-blog-preview" style="position:absolute;z-index:6;top:-20px;left:20px;width:110px;height:80px;transform:scale(0.8) rotate(-8deg)">
+						<div style="font-size: 2rem;">📝</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Blog expanded content -->
+			<div class="folder-content blog-content" id="blogContent" style="display: none;">
+				<div class="blog-list">
+					{blogPosts.map((post) => (
+						<a href={`${import.meta.env.BASE_URL}/blog/${post.slug}`} class="blog-item">
+							<div class="blog-item-header">
+								<h3 class="blog-item-title">{post.title}</h3>
+								<span class="blog-item-date">{new Date(post.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+							</div>
+							<p class="blog-item-description">{post.description}</p>
+							<div class="blog-item-tags">
+								{post.tags?.map((tag) => (
+									<span class="blog-tag">{tag}</span>
+								))}
+							</div>
+						</a>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="contact">
+			<div class="contact-content">
+				<div class="footer-info">
+					<p class="copyright">© 2026 {profile.fullName}</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		// Theme toggle
+		const themeToggle = document.getElementById('themeToggle');
+		const themeIcon = themeToggle?.querySelector('.theme-icon');
+		const html = document.documentElement;
+
+		// Load saved theme or default to dark
+		const savedTheme = localStorage.getItem('theme') || 'dark';
+		html.setAttribute('data-theme', savedTheme);
+		if (themeIcon) {
+			themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+		}
+
+		themeToggle?.addEventListener('click', () => {
+			const currentTheme = html.getAttribute('data-theme');
+			const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+			html.setAttribute('data-theme', newTheme);
+			localStorage.setItem('theme', newTheme);
+
+			if (themeIcon) {
+				themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+			}
+		});
+
+		// Folder toggle functionality
+		document.addEventListener('DOMContentLoaded', () => {
+			const grid = document.getElementById('bentoGrid');
+			const folders = document.querySelectorAll('.folder-item');
+			let currentOpen = null;
+
+			folders.forEach(folder => {
+				folder.addEventListener('click', () => {
+					const folderType = folder.getAttribute('data-folder');
+					const content = document.getElementById(`${folderType}Content`);
+
+					if (currentOpen === folderType) {
+						// Close current folder
+						content.style.display = 'none';
+						grid.classList.remove('expanded-state');
+						grid.classList.add('initial-state');
+						currentOpen = null;
+					} else {
+						// Close previous folder if any
+						if (currentOpen) {
+							document.getElementById(`${currentOpen}Content`).style.display = 'none';
+						}
+
+						// Open new folder
+						content.style.display = 'block';
+						grid.classList.remove('initial-state');
+						grid.classList.add('expanded-state');
+						currentOpen = folderType;
+					}
+				});
+			});
+		});
+	</script>
+</BaseLayout>

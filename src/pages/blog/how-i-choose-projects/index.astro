@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const post = {
+  title: "How I Choose Pet Projects",
+  description: "A bit of pragmatism to avoid wasting weekends on dead ideas.",
+  pubDate: new Date("2026-04-22"),
+  tags: ["career", "projects"]
+};
+---
+
+<BaseLayout lang="en" title={post.title} description={post.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      <a href={`${import.meta.env.BASE_URL}`} class="back-link">← Back to main</a>
+      <h1 class="post-title">{post.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.pubDate.toISOString()}>
+          {post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <div class="post-tags">
+          {post.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <img src={`${import.meta.env.BASE_URL}/blog/hero-projects.svg`} alt="Project selection illustration" class="post-hero" />
+    </header>
+
+    <div class="post-content">
+      <p>The most common mistake with pet projects isn't a "bad idea" — it's <strong>too big of an idea</strong>.</p>
+
+      <p>I've started many projects thinking "I'll do this properly," only to find myself a week later architecting a product that doesn't exist yet.</p>
+
+      <p>Since then, I have a filter. If a project doesn't pass — it stays in my notes.</p>
+
+      <h2>The filter</h2>
+
+      <ol>
+        <li><strong>Can I build an MVP in a weekend?</strong><br>If not — the scope is too big.</li>
+        <li><strong>Will I use it myself?</strong><br>If not — motivation will fade after the first bug.</li>
+        <li><strong>Does it teach me something new?</strong><br>If not — it's just busywork.</li>
+      </ol>
+
+      <p>That's it. Three questions. If all three are "yes" — I start. If even one is "no" — I write it down and move on.</p>
+
+      <h2>Why this works</h2>
+
+      <p>Small projects get finished. Finished projects teach you more than abandoned ones. And projects you actually use stay relevant.</p>
+
+      <p>The goal isn't to build the next big thing. The goal is to build <em>something</em>, learn from it, and move forward.</p>
+    </div>
+  </article>
+</BaseLayout>

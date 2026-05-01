@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+const post = {
+  title: "Как я выбираю пет‑проекты",
+  description: "Немного прагматики, чтобы не тратить выходные на мёртвые идеи.",
+  pubDate: new Date("2026-04-22"),
+  tags: ["карьера", "проекты"]
+};
+---
+
+<BaseLayout lang="ru" title={post.title} description={post.description}>
+  <article class="blog-post">
+    <header class="post-header">
+      <a href={`${import.meta.env.BASE_URL}/ru/`} class="back-link">← Вернуться в главное меню</a>
+      <h1 class="post-title">{post.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.pubDate.toISOString()}>
+          {post.pubDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <div class="post-tags">
+          {post.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <img src={`${import.meta.env.BASE_URL}/blog/hero-projects.svg`} alt="Иллюстрация выбора проектов" class="post-hero" />
+    </header>
+
+    <div class="post-content">
+      <p>Самая частая ошибка в пет‑проектах — это не "плохая идея", а <strong>слишком большая идея</strong>.</p>
+
+      <p>Я много раз начинал "нормально сделать", а потом через неделю ловил себя на том, что пишу архитектуру для продукта, которого ещё не существует.</p>
+
+      <p>С тех пор у меня есть фильтр. Если проект не проходит — он остаётся в заметках.</p>
+
+      <h2>Фильтр</h2>
+
+      <ol>
+        <li><strong>Могу ли я сделать MVP за выходные?</strong><br>Если нет — скоуп слишком большой.</li>
+        <li><strong>Буду ли я сам этим пользоваться?</strong><br>Если нет — мотивация пропадёт после первого бага.</li>
+        <li><strong>Научусь ли я чему-то новому?</strong><br>Если нет — это просто работа ради работы.</li>
+      </ol>
+
+      <p>Всё. Три вопроса. Если на все три "да" — начинаю. Если хотя бы на один "нет" — записываю и иду дальше.</p>
+
+      <h2>Почему это работает</h2>
+
+      <p>Маленькие проекты доделываются. Доделанные проекты учат больше, чем брошенные. А проекты, которыми ты реально пользуешься, остаются актуальными.</p>
+
+      <p>Цель не в том, чтобы сделать следующий большой проект. Цель — сделать <em>что-то</em>, научиться на этом и двигаться дальше.</p>
+    </div>
+  </article>
+</BaseLayout>

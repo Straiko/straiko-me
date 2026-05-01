@@ -1,0 +1,253 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { profile } from "../../content/profile";
+import { projects } from "../../content/projects";
+
+// Временно хардкодим статьи блога
+const blogPosts = [
+  {
+    slug: "how-i-choose-projects",
+    title: "Как я выбираю пет‑проекты",
+    description: "Немного прагматики, чтобы не тратить выходные на мёртвые идеи.",
+    pubDate: "2026-04-22",
+    tags: ["карьера", "проекты"]
+  },
+  {
+    slug: "notes-on-learning",
+    title: "Заметки об обучении",
+    description: "Что я узнал за годы самообразования.",
+    pubDate: "2026-04-20",
+    tags: ["обучение"]
+  },
+  {
+    slug: "starting-with-astro",
+    title: "Начало работы с Astro",
+    description: "Первые шаги в создании сайта на Astro.",
+    pubDate: "2026-04-18",
+    tags: ["веб-разработка", "astro"]
+  }
+];
+---
+
+<BaseLayout lang="ru" title={profile.fullName} description={`${profile.tagline.ru} · ${profile.subtitle.ru}`}>
+	<div class="home-container">
+		<!-- Hero Section -->
+		<section class="hero">
+			<header class="hero-header">
+				<div class="logo">straiko</div>
+				<div class="header-controls">
+					<a href={`${import.meta.env.BASE_URL}`} class="lang-toggle" aria-label="Switch to English">EN</a>
+					<button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
+			</header>
+
+			<div class="hero-profile">
+				<div class="profile-image-container">
+					<div class="profile-image">👤</div>
+				</div>
+				<div class="profile-text">
+					<h1 class="profile-name">{profile.fullName}</h1>
+					<div class="social-links">
+						{profile.links.map((l) => (
+							<a class="social-icon" href={l.href} target="_blank" rel="noreferrer" aria-label={l.label}>
+								{l.label}
+							</a>
+						))}
+					</div>
+					<p class="profile-role">{profile.tagline.ru}</p>
+					<p class="profile-description">{profile.subtitle.ru}</p>
+					<p class="profile-location">
+						<span class="location-icon">📍</span> {profile.location.ru}
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bento Grid -->
+		<div class="bento-grid initial-state" id="bentoGrid" role="region" aria-label="Портфолио секции">
+			<!-- About me folder -->
+			<div class="bento-item item-about folder-item" tabindex="0" data-folder="about" role="button" aria-expanded="false" aria-controls="aboutContent" aria-label="Открыть раздел обо мне">
+				<div class="folder-badge">Обо мне</div>
+				<div class="preview-card-stack">
+					{profile.about.map((section) =>
+						section.items.map((item, i) => (
+							<div class={`preview-card item-card-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
+								<div style="font-size: 2rem;">{item.logo}</div>
+							</div>
+						))
+					)}
+				</div>
+			</div>
+
+			<!-- About me expanded content -->
+			<div class="folder-content about-content" id="aboutContent" style="display: none;" role="region" aria-label="Информация обо мне">
+				<div class="content-grid">
+					{profile.about.map((section) => (
+						<div class="content-section">
+							<h3 class="section-title">{section.title}</h3>
+							<div class="section-items">
+								{section.items.map((item) => (
+									<div class="content-card">
+										<div class="card-logo">{item.logo}</div>
+										<div class="card-text">
+											<h4 class="card-title">{item.name}</h4>
+											<p class="card-subtitle">{item.role.ru}</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Projects folder -->
+			<div class="bento-item item-projects folder-item" tabindex="0" data-folder="projects" role="button" aria-expanded="false" aria-controls="projectsContent" aria-label="Открыть раздел проектов">
+				<div class="folder-badge">Проекты</div>
+				<div class="preview-card-stack">
+					{projects.slice(0, 2).map((p, i) => (
+						<div class={`preview-card item-project-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
+							<div style="font-size: 1.5rem;">💻</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Projects expanded content -->
+			<div class="folder-content projects-content" id="projectsContent" style="display: none;" role="region" aria-label="Мои проекты">
+				<div class="projects-list">
+					{projects.map((p) => (
+						<div class="project-item">
+							<div class="project-header">
+								<h3 class="project-title">{p.title}</h3>
+								{p.badge && <span class="project-badge">{p.badge}</span>}
+							</div>
+							<p class="project-description">{p.description.ru}</p>
+							<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
+								{p.ctaLabel?.ru ?? "открыть →"}
+							</a>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Blog folder -->
+			<div class="bento-item item-blog folder-item" tabindex="0" data-folder="blog" role="button" aria-expanded="false" aria-controls="blogContent" aria-label="Открыть раздел блога">
+				<div class="folder-badge">Блог</div>
+				<div class="preview-card-stack">
+					<div class="preview-card item-blog-preview" style="position:absolute;z-index:6;top:-20px;left:20px;width:110px;height:80px;transform:scale(0.8) rotate(-8deg)">
+						<div style="font-size: 2rem;">📝</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Blog expanded content -->
+			<div class="folder-content blog-content" id="blogContent" style="display: none;" role="region" aria-label="Статьи блога">
+				<div class="blog-list">
+					{blogPosts.map((post) => (
+						<a href={`${import.meta.env.BASE_URL}/ru/blog/${post.slug}`} class="blog-item">
+							<div class="blog-item-header">
+								<h3 class="blog-item-title">{post.title}</h3>
+								<span class="blog-item-date">{new Date(post.pubDate).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+							</div>
+							<p class="blog-item-description">{post.description}</p>
+							<div class="blog-item-tags">
+								{post.tags?.map((tag) => (
+									<span class="blog-tag">{tag}</span>
+								))}
+							</div>
+						</a>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="contact">
+			<div class="contact-content">
+				<div class="footer-info">
+					<p class="copyright">© 2026 {profile.fullName}</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		// Theme toggle
+		const themeToggle = document.getElementById('themeToggle');
+		const themeIcon = themeToggle?.querySelector('.theme-icon');
+		const html = document.documentElement;
+
+		// Load saved theme or default to dark
+		const savedTheme = localStorage.getItem('theme') || 'dark';
+		html.setAttribute('data-theme', savedTheme);
+		if (themeIcon) {
+			themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+		}
+
+		themeToggle?.addEventListener('click', () => {
+			const currentTheme = html.getAttribute('data-theme');
+			const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+			html.setAttribute('data-theme', newTheme);
+			localStorage.setItem('theme', newTheme);
+
+			if (themeIcon) {
+				themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+			}
+		});
+
+		// Folder toggle functionality
+		document.addEventListener('DOMContentLoaded', () => {
+			const grid = document.getElementById('bentoGrid');
+			const folders = document.querySelectorAll('.folder-item');
+			let currentOpen = null;
+
+			const toggleFolder = (folder) => {
+				const folderType = folder.getAttribute('data-folder');
+				const content = document.getElementById(`${folderType}Content`);
+
+				if (currentOpen === folderType) {
+					// Close current folder
+					content.style.display = 'none';
+					grid.classList.remove('expanded-state');
+					grid.classList.add('initial-state');
+					folder.setAttribute('aria-expanded', 'false');
+					currentOpen = null;
+				} else {
+					// Close previous folder if any
+					if (currentOpen) {
+						const prevContent = document.getElementById(`${currentOpen}Content`);
+						prevContent.style.display = 'none';
+						const prevFolder = document.querySelector(`[data-folder="${currentOpen}"]`);
+						if (prevFolder) prevFolder.setAttribute('aria-expanded', 'false');
+					}
+
+					// Open new folder
+					content.style.display = 'block';
+					grid.classList.remove('initial-state');
+					grid.classList.add('expanded-state');
+					folder.setAttribute('aria-expanded', 'true');
+					currentOpen = folderType;
+				}
+			};
+
+			folders.forEach(folder => {
+				// Click handler
+				folder.addEventListener('click', () => {
+					toggleFolder(folder);
+				});
+
+				// Keyboard handler
+				folder.addEventListener('keydown', (e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						toggleFolder(folder);
+					}
+				});
+			});
+		});
+	</script>
+</BaseLayout>
