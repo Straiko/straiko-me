@@ -2,31 +2,22 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { profile } from "../../content/profile";
 import { projects } from "../../content/projects";
+import { getCollection } from "astro:content";
 
-// Временно хардкодим статьи блога
-const blogPosts = [
-  {
-    slug: "how-i-choose-projects",
-    title: "Как я выбираю пет‑проекты",
-    description: "Немного прагматики, чтобы не тратить выходные на мёртвые идеи.",
-    pubDate: "2026-04-22",
-    tags: ["карьера", "проекты"]
-  },
-  {
-    slug: "notes-on-learning",
-    title: "Заметки об обучении",
-    description: "Что я узнал за годы самообразования.",
-    pubDate: "2026-04-20",
-    tags: ["обучение"]
-  },
-  {
-    slug: "starting-with-astro",
-    title: "Начало работы с Astro",
-    description: "Первые шаги в создании сайта на Astro.",
-    pubDate: "2026-04-18",
-    tags: ["веб-разработка", "astro"]
-  }
-];
+// Query and sort blog posts dynamically
+const posts = await getCollection("blog");
+const blogPosts = posts
+  .map((post) => {
+    const slug = (post.slug ?? post.id).replace(/\.mdx?$/i, "");
+    return {
+      slug,
+      title: post.data.title,
+      description: post.data.description,
+      pubDate: post.data.pubDate,
+      tags: post.data.tags
+    };
+  })
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 ---
 
 <BaseLayout lang="ru" title={profile.fullName} description={`${profile.tagline.ru} · ${profile.subtitle.ru}`}>
@@ -45,7 +36,12 @@ const blogPosts = [
 
 			<div class="hero-profile">
 				<div class="profile-image-container">
-					<div class="profile-image">👤</div>
+					<!-- High-end Terminal SVG Graphic -->
+					<svg class="profile-avatar-graphic" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity="0.3" />
+						<path d="M30 40L45 50L30 60" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+						<line x1="52" y1="60" x2="72" y2="60" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+					</svg>
 				</div>
 				<div class="profile-text">
 					<h1 class="profile-name">{profile.fullName}</h1>
@@ -72,7 +68,7 @@ const blogPosts = [
 				<div class="folder-badge">Обо мне</div>
 				<div class="preview-card-stack">
 					{profile.about.map((section) =>
-						section.items.map((item, i) => (
+						section.items.slice(0, 3).map((item, i) => (
 							<div class={`preview-card item-card-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
 								<div style="font-size: 2rem;">{item.logo}</div>
 							</div>
@@ -125,6 +121,13 @@ const blogPosts = [
 								{p.badge && <span class="project-badge">{p.badge}</span>}
 							</div>
 							<p class="project-description">{p.description.ru}</p>
+							{p.tags && (
+								<div class="project-tags-list">
+									{p.tags.map((tag) => (
+										<span class="project-tag-item">{tag}</span>
+									))}
+								</div>
+							)}
 							<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
 								{p.ctaLabel?.ru ?? "открыть →"}
 							</a>
@@ -150,7 +153,7 @@ const blogPosts = [
 						<a href={`${import.meta.env.BASE_URL}/ru/blog/${post.slug}`} class="blog-item">
 							<div class="blog-item-header">
 								<h3 class="blog-item-title">{post.title}</h3>
-								<span class="blog-item-date">{new Date(post.pubDate).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+								<span class="blog-item-date">{post.pubDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
 							</div>
 							<p class="blog-item-description">{post.description}</p>
 							<div class="blog-item-tags">
@@ -199,7 +202,7 @@ const blogPosts = [
 			}
 		});
 
-		// Folder toggle functionality
+		// Folder toggle functionality (with keyboard accessibility)
 		document.addEventListener('DOMContentLoaded', () => {
 			const grid = document.getElementById('bentoGrid');
 			const folders = document.querySelectorAll('.folder-item');
@@ -211,24 +214,28 @@ const blogPosts = [
 
 				if (currentOpen === folderType) {
 					// Close current folder
-					content.style.display = 'none';
-					grid.classList.remove('expanded-state');
-					grid.classList.add('initial-state');
+					if (content) content.style.display = 'none';
+					if (grid) {
+						grid.classList.remove('expanded-state');
+						grid.classList.add('initial-state');
+					}
 					folder.setAttribute('aria-expanded', 'false');
 					currentOpen = null;
 				} else {
 					// Close previous folder if any
 					if (currentOpen) {
 						const prevContent = document.getElementById(`${currentOpen}Content`);
-						prevContent.style.display = 'none';
+						if (prevContent) prevContent.style.display = 'none';
 						const prevFolder = document.querySelector(`[data-folder="${currentOpen}"]`);
 						if (prevFolder) prevFolder.setAttribute('aria-expanded', 'false');
 					}
 
 					// Open new folder
-					content.style.display = 'block';
-					grid.classList.remove('initial-state');
-					grid.classList.add('expanded-state');
+					if (content) content.style.display = 'block';
+					if (grid) {
+						grid.classList.remove('initial-state');
+						grid.classList.add('expanded-state');
+					}
 					folder.setAttribute('aria-expanded', 'true');
 					currentOpen = folderType;
 				}

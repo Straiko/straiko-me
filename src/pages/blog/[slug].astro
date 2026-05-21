@@ -19,26 +19,25 @@ const assetSrc = (src) => (src?.startsWith("/") ? withBase(src) : src);
 ---
 
 <BaseLayout lang="en" title={post.data.title} description={post.data.description}>
-	<div class="min-h-screen" style="background-color: #0a0a0a; padding: 3rem 1.5rem;">
-		<article style="max-width: 720px; margin: 0 auto;">
-			<header style="margin-bottom: 3rem;">
-				<a class="inline-block" style="color: #888; font-size: 0.875rem; margin-bottom: 1.5rem; text-decoration: none; transition: color 0.2s;" href={withBase("/en")}>← Back to home</a>
-				<h1 style="color: #e4e4e4; font-size: 2.25rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem;">{post.data.title}</h1>
-				<p style="color: #999; font-size: 1.125rem; line-height: 1.6; margin-bottom: 0.75rem;">{post.data.description}</p>
-				<time style="display: block; color: #666; font-size: 0.875rem; margin-bottom: 1.25rem;" datetime={post.data.pubDate.toISOString()}>
-					{post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "2-digit" })}
-				</time>
-				{post.data.tags?.length ? (
-					<div style="display: flex; flex-wrap: wrap; gap: 0.625rem; margin-bottom: 2rem;">
-						{post.data.tags.map((t) => (
-							<span style="background-color: #1a1a1a; border: 1px solid #333; border-radius: 16px; padding: 0.375rem 0.875rem; color: #999; font-size: 0.8125rem; font-weight: 500;">{t}</span>
-						))}
-					</div>
-				) : null}
+	<div class="min-h-screen">
+		<article class="blog-post">
+			<header class="post-header">
+				<a class="back-link" href={withBase("/")}>← Back to home</a>
+				<h1 class="post-title">{post.data.title}</h1>
+				<div class="post-meta">
+					<time datetime={post.data.pubDate.toISOString()}>
+						{post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+					</time>
+					{post.data.tags?.length ? (
+						<div class="post-tags">
+							{post.data.tags.map((t) => (
+								<span class="tag">{t}</span>
+							))}
+						</div>
+					) : null}
+				</div>
 				{post.data.hero ? (
-					<div style="overflow: hidden; border-radius: 12px; border: 1px solid #2a2a2a; background-color: #1a1a1a; margin-bottom: 2.5rem;">
-						<img src={assetSrc(post.data.hero.src)} alt={post.data.hero.alt} style="width: 100%; height: auto; object-fit: cover; max-height: 400px; display: block;" />
-					</div>
+					<img class="post-hero" src={assetSrc(post.data.hero.src)} alt={post.data.hero.alt} />
 				) : null}
 			</header>
 
@@ -48,4 +47,3 @@ const assetSrc = (src) => (src?.startsWith("/") ? withBase(src) : src);
 		</article>
 	</div>
 </BaseLayout>
-

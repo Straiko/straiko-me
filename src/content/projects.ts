@@ -10,6 +10,7 @@ export type Project = {
     ru: string;
     en: string;
   };
+  tags?: string[];
 };
 
 // Curated from https://github.com/Straiko (sorted by "ship value" for a portfolio)
@@ -25,7 +26,8 @@ export const projects: Project[] = [
     ctaLabel: {
       ru: "открыть на GitHub →",
       en: "view on GitHub →"
-    }
+    },
+    tags: ["PyQt6", "AI APIs", "Speech Recognition", "Python"]
   },
   {
     title: "easy-php",
@@ -37,7 +39,8 @@ export const projects: Project[] = [
     ctaLabel: {
       ru: "открыть на GitHub →",
       en: "view on GitHub →"
-    }
+    },
+    tags: ["PHP", "OOP", "JSON", "Backend"]
   },
   {
     title: "2-work-52",
@@ -49,6 +52,7 @@ export const projects: Project[] = [
     ctaLabel: {
       ru: "открыть на GitHub →",
       en: "view on GitHub →"
-    }
+    },
+    tags: ["JavaScript", "DOM", "Fetch API", "Frontend"]
   }
 ];

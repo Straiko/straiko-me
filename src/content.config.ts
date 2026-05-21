@@ -22,5 +22,8 @@ const blogEn = defineCollection({
   schema: blogRu.schema
 });
 
-export const collections = { blogRu, blogEn };
+export const collections = {
+  "blog": blogRu,
+  "blog-en": blogEn
+};
 
