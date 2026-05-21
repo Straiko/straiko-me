@@ -69,7 +69,7 @@ const blogPosts = posts
 				<div class="preview-card-stack">
 					{profile.about.map((section) =>
 						section.items.slice(0, 3).map((item, i) => (
-							<div class={`preview-card item-card-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
+							<div class={`preview-card item-card-${i}`}>
 								<div style="font-size: 2rem;">{item.logo}</div>
 							</div>
 						))
@@ -104,7 +104,7 @@ const blogPosts = posts
 				<div class="folder-badge">Projects</div>
 				<div class="preview-card-stack">
 					{projects.slice(0, 2).map((p, i) => (
-						<div class={`preview-card item-project-${i}`} style={`position:absolute;z-index:${6-i};top:${-20-i*15}px;left:${20+i*15}px;width:110px;height:80px;transform:scale(0.8) rotate(${i % 2 === 0 ? '-8deg' : '12deg'})`}>
+						<div class={`preview-card item-project-${i}`}>
 							<div style="font-size: 1.5rem;">💻</div>
 						</div>
 					))}
@@ -140,7 +140,7 @@ const blogPosts = posts
 			<div class="bento-item item-blog folder-item" tabindex="0" data-folder="blog" role="button" aria-expanded="false" aria-controls="blogContent" aria-label="Open Blog section">
 				<div class="folder-badge">Blog</div>
 				<div class="preview-card-stack">
-					<div class="preview-card item-blog-preview" style="position:absolute;z-index:6;top:-20px;left:20px;width:110px;height:80px;transform:scale(0.8) rotate(-8deg)">
+					<div class="preview-card item-blog-preview">
 						<div style="font-size: 2rem;">📝</div>
 					</div>
 				</div>
