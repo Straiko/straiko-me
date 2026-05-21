@@ -67,13 +67,11 @@ const blogPosts = posts
 			<div class="bento-item item-about folder-item" tabindex="0" data-folder="about" role="button" aria-expanded="false" aria-controls="aboutContent" aria-label="Open About Me section">
 				<div class="folder-badge">About me</div>
 				<div class="preview-card-stack">
-					{profile.about.map((section) =>
-						section.items.slice(0, 3).map((item, i) => (
-							<div class={`preview-card item-card-${i}`}>
-								<div style="font-size: 2rem;">{item.logo}</div>
-							</div>
-						))
-					)}
+					{profile.about.flatMap((section) => section.items).slice(0, 3).map((item, i) => (
+						<div class={`preview-card item-card-${i}`}>
+							<div style="font-size: 2rem;">{item.logo}</div>
+						</div>
+					))}
 				</div>
 			</div>
 
