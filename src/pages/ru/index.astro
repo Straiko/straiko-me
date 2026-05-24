@@ -212,39 +212,6 @@ const skillsMap = [
 					</div>
 				</div>
 			</div>
-
-			<!-- Contact folder -->
-			<div class="bento-item item-contact folder-item" tabindex="0" data-folder="contact" role="button" aria-expanded="false" aria-controls="contactContent" aria-label="Открыть раздел контактов">
-				<div class="folder-tab">Контакты</div>
-			</div>
-
-			<!-- Contact expanded content -->
-			<div class="folder-content contact-content" id="contactContent" style="display: none;" role="region" aria-label="Форма обратной связи">
-				<div class="contact-form-container">
-					<form id="contactForm" class="contact-form">
-						<div class="form-group">
-							<label for="formName" class="form-label">Имя и фамилия</label>
-							<input type="text" id="formName" name="name" class="form-input" placeholder="Как к вам обращаться?" required />
-						</div>
-						<div class="form-group">
-							<label for="formEmail" class="form-label">Электронная почта</label>
-							<input type="email" id="formEmail" name="email" class="form-input" placeholder="name@example.com" required />
-						</div>
-						<div class="form-group">
-							<label for="formMessage" class="form-label">Сообщение</label>
-							<textarea id="formMessage" name="message" class="form-textarea" placeholder="Расскажите о вашем проекте или задайте вопрос..." required></textarea>
-						</div>
-						<button type="submit" class="submit-button" id="submitBtn">
-							<span>Отправить сообщение</span>
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<line x1="22" y1="2" x2="11" y2="13"></line>
-								<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-							</svg>
-						</button>
-						<div id="formStatus" class="form-message"></div>
-					</form>
-				</div>
-			</div>
 		</div>
 
 		<!-- Footer -->
@@ -462,26 +429,6 @@ const skillsMap = [
 			// Click terminal body to focus input
 			document.querySelector('.terminal-window')?.addEventListener('click', () => {
 				termInput?.focus();
-			});
-
-			// Glassmorphic Contact Form Functionality
-			const contactForm = document.getElementById('contactForm');
-			const formStatus = document.getElementById('formStatus');
-			const submitBtn = document.getElementById('submitBtn');
-
-			contactForm?.addEventListener('submit', (e) => {
-				e.preventDefault();
-				submitBtn.disabled = true;
-				const btnText = submitBtn.querySelector('span');
-				if (btnText) btnText.textContent = 'Отправка...';
-
-				setTimeout(() => {
-					submitBtn.disabled = false;
-					if (btnText) btnText.textContent = 'Отправить сообщение';
-					formStatus.textContent = 'Ваше сообщение успешно отправлено! Спасибо.';
-					formStatus.className = 'form-message success';
-					contactForm.reset();
-				}, 1500);
 			});
 		});
 	</script>
