@@ -18,6 +18,15 @@ const blogPosts = posts
     };
   })
   .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+const skillsMap = [
+  { name: "Programming Languages", percent: 90, icon: "💻", tags: ["Python", "JavaScript", "C++", "C", "PHP", "Node.js"] },
+  { name: "Web Technologies", percent: 85, icon: "🌐", tags: ["HTML", "CSS", "SQL", "React.js", "PHP (backend)"] },
+  { name: "Databases & Design", percent: 80, icon: "🗄️", tags: ["SQL", "Data Modeling", "Database Design"] },
+  { name: "Networks & Infrastructure", percent: 75, icon: "🔌", tags: ["Computer Networks", "VLAN", "Hardware Setup", "FAT/NTFS", "Linux/OS"] },
+  { name: "Architecture & UML", percent: 70, icon: "🏗️", tags: ["UML Diagrams", "Use Cases", "Information Systems Design"] },
+  { name: "Dev Tools", percent: 85, icon: "🔧", tags: ["Git", "IS Admin", "CLI Tools", "Astro"] }
+];
 ---
 
 <BaseLayout lang="en" title={profile.fullName} description={`${profile.tagline.en} · ${profile.subtitle.en}`}>
@@ -67,51 +76,73 @@ const blogPosts = posts
 			<div class="bento-item item-about folder-item" tabindex="0" data-folder="about" role="button" aria-expanded="false" aria-controls="aboutContent" aria-label="Open About Me section">
 				<div class="folder-tab">About me</div>
 				<div class="preview-card-stack">
-					{profile.about.flatMap((section) => section.items).slice(0, 3).map((item, i) => (
-						<div class={`preview-card item-card-${i}`}>
-							{i === 0 && (
-								<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-									<path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-									<path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
-								</svg>
-							)}
-							{i === 1 && (
-								<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-									<polyline points="4 17 10 11 4 5"/>
-									<line x1="12" y1="19" x2="20" y2="19"/>
-								</svg>
-							)}
-							{i === 2 && (
-								<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-									<circle cx="12" cy="12" r="10"/>
-									<line x1="2" y1="12" x2="22" y2="12"/>
-									<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-								</svg>
-							)}
-						</div>
-					))}
+					<div class="preview-card item-card-0">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+							<path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
+						</svg>
+					</div>
+					<div class="preview-card item-card-1">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="4 17 10 11 4 5"/>
+							<line x1="12" y1="19" x2="20" y2="19"/>
+						</svg>
+					</div>
+					<div class="preview-card item-card-2">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"/>
+							<line x1="2" y1="12" x2="22" y2="12"/>
+							<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+						</svg>
+					</div>
 				</div>
 			</div>
 
-			<!-- About me expanded content -->
+			<!-- About me expanded content: Interactive Skills Dashboard -->
 			<div class="folder-content about-content" id="aboutContent" style="display: none;" role="region" aria-label="Information about me">
-				<div class="content-grid">
-					{profile.about.map((section) => (
-						<div class="content-section">
-							<h3 class="section-title">{section.titleEn || section.title}</h3>
-							<div class="section-items">
-								{section.items.map((item) => (
-									<div class="content-card">
-										<div class="card-logo">{item.logo}</div>
-										<div class="card-text">
-											<h4 class="card-title">{item.name}</h4>
-											<p class="card-subtitle">{item.role.en}</p>
-										</div>
-									</div>
-								))}
+				<div class="skills-dashboard">
+					<!-- Education -->
+					<div class="skills-category">
+						<div class="skills-header-row">
+							<span class="skills-header-icon">🎓</span>
+							<h3 class="skills-header-title">Education</h3>
+						</div>
+						<div class="skills-grid-new">
+							<div class="skill-visual-card" style="display: flex; gap: 1rem; align-items: center;">
+								<span style="font-size: 2.25rem;">🏫</span>
+								<div>
+									<h4 class="card-title">МКАГ</h4>
+									<p class="card-subtitle">Student of Information Technology Specialization</p>
+								</div>
 							</div>
 						</div>
-					))}
+					</div>
+
+					<!-- Visual Skills Matrix -->
+					<div class="skills-category">
+						<div class="skills-header-row">
+							<span class="skills-header-icon">⚡</span>
+							<h3 class="skills-header-title">Technical Skills Matrix</h3>
+						</div>
+						<div class="skills-grid-new">
+							{skillsMap.map((sk) => (
+								<div class="skill-visual-card">
+									<div class="skill-info">
+										<span class="skill-name">{sk.icon} {sk.name}</span>
+										<span class="skill-percent">{sk.percent}%</span>
+									</div>
+									<div class="skill-bar-bg">
+										<div class="skill-bar-fill" style={`width: ${sk.percent}%`}></div>
+									</div>
+									<div class="skill-tags-inline">
+										{sk.tags.map((tg) => (
+											<span class="skill-tag-micro">{tg}</span>
+										))}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -119,23 +150,20 @@ const blogPosts = posts
 			<div class="bento-item item-projects folder-item" tabindex="0" data-folder="projects" role="button" aria-expanded="false" aria-controls="projectsContent" aria-label="Open Projects section">
 				<div class="folder-tab">Projects</div>
 				<div class="preview-card-stack">
-					{projects.slice(0, 2).map((p, i) => (
-						<div class={`preview-card item-project-${i}`}>
-							{i === 0 ? (
-								<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-									<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-									<line x1="2" y1="20" x2="22" y2="20"/>
-									<line x1="12" y1="17" x2="12" y2="20"/>
-								</svg>
-							) : (
-								<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-									<polygon points="12 2 2 7 12 12 22 7 12 2"/>
-									<polyline points="2 17 12 22 22 17"/>
-									<polyline points="2 12 12 17 22 12"/>
-								</svg>
-							)}
-						</div>
-					))}
+					<div class="preview-card item-project-0">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+							<line x1="2" y1="20" x2="22" y2="20"/>
+							<line x1="12" y1="17" x2="12" y2="20"/>
+						</svg>
+					</div>
+					<div class="preview-card item-project-1">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<polygon points="12 2 2 7 12 12 22 7 12 2"/>
+							<polyline points="2 17 12 22 22 17"/>
+							<polyline points="2 12 12 17 22 12"/>
+						</svg>
+					</div>
 				</div>
 			</div>
 
@@ -196,6 +224,88 @@ const blogPosts = posts
 					))}
 				</div>
 			</div>
+
+			<!-- Retro Terminal folder -->
+			<div class="bento-item item-terminal folder-item" tabindex="0" data-folder="terminal" role="button" aria-expanded="false" aria-controls="terminalContent" aria-label="Open CLI Terminal section">
+				<div class="folder-tab">Terminal</div>
+				<div class="preview-card-stack">
+					<div class="preview-card item-terminal-preview">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="4 17 10 11 4 5"></polyline>
+							<line x1="12" y1="19" x2="20" y2="19"></line>
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<!-- Retro Terminal expanded content -->
+			<div class="folder-content terminal-content" id="terminalContent" style="display: none;" role="region" aria-label="Interactive Terminal Console">
+				<div class="terminal-window">
+					<div class="terminal-topbar">
+						<div class="terminal-controls">
+							<span class="terminal-dot red"></span>
+							<span class="terminal-dot yellow"></span>
+							<span class="terminal-dot green"></span>
+						</div>
+						<div class="terminal-title">straiko@portfolio:~</div>
+						<div style="width: 42px;"></div>
+					</div>
+					<canvas id="terminal-matrix" class="terminal-matrix-canvas"></canvas>
+					<div id="terminal-body" class="terminal-body">
+						<div class="terminal-line terminal-output-accent">Welcome to Daniil Starikov's Interactive Portfolio CLI (v2.1.0)</div>
+						<div class="terminal-line">Type <span class="terminal-output-success">help</span> to view all available commands.</div>
+						<div id="terminal-output-container"></div>
+						<div class="terminal-input-line">
+							<span class="terminal-prompt">straiko@portfolio:~$</span>
+							<div class="terminal-caret-wrapper">
+								<input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+								<span id="terminal-caret" class="terminal-caret"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Contact folder -->
+			<div class="bento-item item-contact folder-item" tabindex="0" data-folder="contact" role="button" aria-expanded="false" aria-controls="contactContent" aria-label="Open Contact section">
+				<div class="folder-tab">Contact</div>
+				<div class="preview-card-stack">
+					<div class="preview-card item-contact-preview">
+						<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+							<polyline points="22,6 12,13 2,6" />
+						</svg>
+					</div>
+				</div>
+			</div>
+
+			<!-- Contact expanded content -->
+			<div class="folder-content contact-content" id="contactContent" style="display: none;" role="region" aria-label="Contact feedback form">
+				<div class="contact-form-container">
+					<form id="contactForm" class="contact-form">
+						<div class="form-group">
+							<label for="formName" class="form-label">Full Name</label>
+							<input type="text" id="formName" name="name" class="form-input" placeholder="Your Name" required />
+						</div>
+						<div class="form-group">
+							<label for="formEmail" class="form-label">Email Address</label>
+							<input type="email" id="formEmail" name="email" class="form-input" placeholder="name@example.com" required />
+						</div>
+						<div class="form-group">
+							<label for="formMessage" class="form-label">Message</label>
+							<textarea id="formMessage" name="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+						</div>
+						<button type="submit" class="submit-button" id="submitBtn">
+							<span>Send Message</span>
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="22" y1="2" x2="11" y2="13"></line>
+								<polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+							</svg>
+						</button>
+						<div id="formStatus" class="form-message"></div>
+					</form>
+				</div>
+			</div>
 		</div>
 
 		<!-- Footer -->
@@ -208,13 +318,12 @@ const blogPosts = posts
 		</footer>
 	</div>
 
-	<script>
+	<script is:inline>
 		// Theme toggle
 		const themeToggle = document.getElementById('themeToggle');
 		const themeIcon = themeToggle?.querySelector('.theme-icon');
 		const html = document.documentElement;
 
-		// Load saved theme or default to dark
 		const savedTheme = localStorage.getItem('theme') || 'dark';
 		html.setAttribute('data-theme', savedTheme);
 		if (themeIcon) {
@@ -244,7 +353,6 @@ const blogPosts = posts
 				const content = document.getElementById(`${folderType}Content`);
 
 				if (currentOpen === folderType) {
-					// Close current folder
 					if (content) content.style.display = 'none';
 					if (grid) {
 						grid.classList.remove('expanded-state');
@@ -253,7 +361,6 @@ const blogPosts = posts
 					folder.setAttribute('aria-expanded', 'false');
 					currentOpen = null;
 				} else {
-					// Close previous folder if any
 					if (currentOpen) {
 						const prevContent = document.getElementById(`${currentOpen}Content`);
 						if (prevContent) prevContent.style.display = 'none';
@@ -261,7 +368,6 @@ const blogPosts = posts
 						if (prevFolder) prevFolder.setAttribute('aria-expanded', 'false');
 					}
 
-					// Open new folder
 					if (content) content.style.display = 'block';
 					if (grid) {
 						grid.classList.remove('initial-state');
@@ -269,22 +375,174 @@ const blogPosts = posts
 					}
 					folder.setAttribute('aria-expanded', 'true');
 					currentOpen = folderType;
+
+					// Focus terminal input if terminal is opened
+					if (folderType === 'terminal') {
+						setTimeout(() => {
+							document.getElementById('terminal-input')?.focus();
+						}, 100);
+					}
 				}
 			};
 
 			folders.forEach(folder => {
-				// Click handler
 				folder.addEventListener('click', () => {
 					toggleFolder(folder);
 				});
 
-				// Keyboard handler
 				folder.addEventListener('keydown', (e) => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						e.preventDefault();
 						toggleFolder(folder);
 					}
 				});
+			});
+
+			// Retro Terminal Functionality
+			const termInput = document.getElementById('terminal-input');
+			const termOutput = document.getElementById('terminal-output-container');
+			const termWindow = document.getElementById('terminal-body');
+			const termMatrix = document.getElementById('terminal-matrix');
+
+			let matrixInterval = null;
+
+			function handleMatrix() {
+				if (matrixInterval) {
+					clearInterval(matrixInterval);
+					matrixInterval = null;
+					const ctx = termMatrix.getContext('2d');
+					ctx.clearRect(0, 0, termMatrix.width, termMatrix.height);
+					return "Matrix digital rain deactivated.";
+				} else {
+					const ctx = termMatrix.getContext('2d');
+					termMatrix.width = termMatrix.parentElement.offsetWidth;
+					termMatrix.height = 380;
+					
+					const chars = '01010101ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺ'.split('');
+					const fontSize = 14;
+					const columns = termMatrix.width / fontSize;
+					const rainDrops = Array(Math.floor(columns)).fill(1);
+					
+					ctx.font = fontSize + 'px monospace';
+					
+					function draw() {
+						ctx.fillStyle = 'rgba(2, 6, 23, 0.05)';
+						ctx.fillRect(0, 0, termMatrix.width, termMatrix.height);
+						ctx.fillStyle = '#06b6d4';
+						
+						for (let i = 0; i < rainDrops.length; i++) {
+							const text = chars[Math.floor(Math.random() * chars.length)];
+							ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+							
+							if (rainDrops[i] * fontSize > termMatrix.height && Math.random() > 0.975) {
+								rainDrops[i] = 0;
+							}
+							rainDrops[i]++;
+						}
+					}
+					
+					matrixInterval = setInterval(draw, 30);
+					return "Matrix digital rain activated! Press matrix again to close.";
+				}
+			}
+
+			function writeLine(text, className = '') {
+				const line = document.createElement('div');
+				line.className = 'terminal-line ' + className;
+				line.textContent = text;
+				termOutput.appendChild(line);
+				termWindow.scrollTop = termWindow.scrollHeight;
+			}
+
+			termInput?.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter') {
+					const cmdVal = termInput.value.trim();
+					termInput.value = '';
+					
+					if (!cmdVal) return;
+					
+					writeLine(`straiko@portfolio:~$ ${cmdVal}`, 'terminal-input-line');
+					
+					const args = cmdVal.toLowerCase().split(' ');
+					const cmd = args[0];
+					
+					switch (cmd) {
+						case 'help':
+							writeLine('Available commands:', 'terminal-output-accent');
+							writeLine('  about    - Information about Daniil Starikov');
+							writeLine('  skills   - List of primary IT competencies');
+							writeLine('  projects - View developed applications and GitHub references');
+							writeLine('  blog     - List of recent engineering notes');
+							writeLine('  contact  - Display official communication handles');
+							writeLine('  matrix   - Toggle retro cyber code rain');
+							writeLine('  clear    - Clear terminal logs');
+							break;
+						case 'about':
+							writeLine('Name: Daniil Starikov');
+							writeLine('Status: IT Student at МКАГ (Moscow, Russia)');
+							writeLine('Goal: Building fast, modern, and highly visual applications.');
+							break;
+						case 'skills':
+							writeLine('IT Competencies:', 'terminal-output-accent');
+							writeLine('  - Languages: Python, JavaScript, C++, C, PHP, Node.js (90%)');
+							writeLine('  - Web Tech: HTML, CSS, SQL, React.js, PHP Backend (85%)');
+							writeLine('  - Databases: Model schemas, database query optimization (80%)');
+							writeLine('  - Network: Router config, VLAN setup, systems admin (75%)');
+							break;
+						case 'projects':
+							writeLine('Developed projects:', 'terminal-output-accent');
+							writeLine('  [1] Olympus (fast_trans) - PyQt6 + AI desktop translator');
+							writeLine('  [2] easy-php             - Curated backend utility sets');
+							writeLine('  [3] 2-work-52            - Advanced JS sandbox and tasks');
+							writeLine('Type any name in your browser address to open.');
+							break;
+						case 'blog':
+							writeLine('Recent blog entries:', 'terminal-output-accent');
+							writeLine('  - Starting with Astro   (May 2026)');
+							writeLine('  - Notes on learning     (April 2026)');
+							writeLine('  - How I choose projects (March 2026)');
+							break;
+						case 'contact':
+							writeLine('Contact Channels:', 'terminal-output-accent');
+							writeLine('  Email: Daniilstarikov2017@gmail.com');
+							writeLine('  GitHub: https://github.com/Straiko');
+							break;
+						case 'matrix':
+							const res = handleMatrix();
+							writeLine(res, 'terminal-output-success');
+							break;
+						case 'clear':
+							termOutput.innerHTML = '';
+							break;
+						default:
+							writeLine(`Command not found: "${cmd}". Type "help" for a list of valid commands.`, 'terminal-output-error');
+					}
+				}
+			});
+
+			// Click terminal body to focus input
+			document.querySelector('.terminal-window')?.addEventListener('click', () => {
+				termInput?.focus();
+			});
+
+			// Glassmorphic Contact Form Functionality
+			const contactForm = document.getElementById('contactForm');
+			const formStatus = document.getElementById('formStatus');
+			const submitBtn = document.getElementById('submitBtn');
+
+			contactForm?.addEventListener('submit', (e) => {
+				e.preventDefault();
+				submitBtn.disabled = true;
+				const btnText = submitBtn.querySelector('span');
+				if (btnText) btnText.textContent = 'Sending...';
+
+				setTimeout(() => {
+					submitBtn.disabled = false;
+					if (btnText) btnText.textContent = 'Send Message';
+					formStatus.textContent = 'Your message has been sent successfully! Thank you.';
+					formStatus.className = 'form-message success';
+					contactForm.reset();
+				}, 1500);
 			});
 		});
 	</script>
