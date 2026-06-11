@@ -967,13 +967,6 @@ body::after {
 .project-link-live:hover {
   color: #6ee7b7;
 }
-  font-weight: 700;
-}
-
-.project-link:hover {
-  color: #a5b4fc;
-  transform: translateX(2px);
-}
 
 [data-theme="light"] .project-link {
   color: #4f46e5;
