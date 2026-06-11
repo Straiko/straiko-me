@@ -111,12 +111,11 @@ a {
 
 /* Hero Section */
 .hero {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8rem 2rem 4rem;
+  padding: 7rem 2rem 4rem;
   text-align: center;
   position: relative;
 }
