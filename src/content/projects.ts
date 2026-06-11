@@ -46,6 +46,20 @@ export const projects: Project[] = [
     tags: ["Telegram Bot", "OCR", "Python", "QR Codes"]
   },
   {
+    badge: "NEW",
+    title: "Ozonbratik Bot",
+    description: {
+      ru: "Telegram-бот для отслеживания цен и товаров на Ozon с уведомлениями о скидках.",
+      en: "Telegram bot for tracking prices and products on Ozon with discount notifications."
+    },
+    href: "https://t.me/Ozonbratik_bot",
+    ctaLabel: {
+      ru: "открыть в Telegram →",
+      en: "open in Telegram →"
+    },
+    tags: ["Telegram Bot", "Ozon API", "Python", "Price Tracking"]
+  },
+  {
     title: "easy-php",
     description: {
       ru: "Коллекция PHP утилит и экспериментов для изучения языка.",
