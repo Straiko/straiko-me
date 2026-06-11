@@ -147,9 +147,16 @@ const skillsMap = [
 									))}
 								</div>
 							)}
-							<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
-								{p.ctaLabel?.ru ?? "открыть →"}
-							</a>
+							<div class="project-links">
+								<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
+									{p.ctaLabel?.ru ?? "открыть →"}
+								</a>
+								{p.liveUrl && (
+									<a class="project-link project-link-live" href={p.liveUrl} target="_blank" rel="noreferrer">
+										демо →
+									</a>
+								)}
+							</div>
 						</div>
 					))}
 				</div>
@@ -398,8 +405,9 @@ const skillsMap = [
 						case 'projects':
 							writeLine('Разработанные проекты:', 'terminal-output-accent');
 							writeLine('  [1] Olympus (fast_trans) - Desktop приложение для мгновенного перевода с AI');
-							writeLine('  [2] easy-php             - Коллекция backend утилит на PHP');
-							writeLine('  [3] 2-work-52            - Практические задачи и песочница на JavaScript');
+							writeLine('  [2] SHK Bot             - Telegram-бот для сканирования штрих-кодов');
+							writeLine('  [3] easy-php             - Коллекция backend утилит на PHP');
+							writeLine('  [4] 2-work-52            - Практические задачи и песочница на JavaScript');
 							writeLine('Для открытия перейдите по ссылкам во вкладке "Проекты".');
 							break;
 						case 'blog':
