@@ -4,7 +4,6 @@ import { profile } from "../content/profile";
 import { projects } from "../content/projects";
 import { getCollection } from "astro:content";
 
-// Query and sort blog posts dynamically
 const posts = await getCollection("blog-en");
 const blogPosts = posts
   .map((post) => {
@@ -21,423 +20,296 @@ const blogPosts = posts
 
 const skillsMap = [
   { name: "Programming Languages", percent: 45, icon: "💻", tags: ["Python", "JavaScript", "C++", "C", "PHP", "Node.js"] },
-  { name: "Web Technologies", percent: 60, icon: "🌐", tags: ["HTML", "CSS", "SQL", "React.js", "PHP (backend)"] },
+  { name: "Web Technologies", percent: 60, icon: "🌐", tags: ["HTML", "CSS", "SQL", "React.js", "PHP"] },
   { name: "Databases & Design", percent: 70, icon: "🗄️", tags: ["SQL", "Data Modeling", "Database Design"] },
-  { name: "Networks & Infrastructure", percent: 40, icon: "🔌", tags: ["Computer Networks", "VLAN", "Hardware Setup", "FAT/NTFS", "Linux/OS"] },
-  { name: "Architecture & UML", percent: 80, icon: "🏗️", tags: ["UML Diagrams", "Use Cases", "Information Systems Design"] },
-  { name: "Dev Tools", percent: 40, icon: "🔧", tags: ["Git", "IS Admin", "CLI Tools", "Astro"] }
+  { name: "Networks & Infrastructure", percent: 40, icon: "🔌", tags: ["Computer Networks", "VLAN", "Hardware", "Linux"] },
+  { name: "Architecture & UML", percent: 80, icon: "🏗️", tags: ["UML Diagrams", "Use Cases", "System Design"] },
+  { name: "Dev Tools", percent: 40, icon: "🔧", tags: ["Git", "CLI Tools", "Astro", "Node.js"] }
+];
+
+const features = [
+  {
+    icon: "⚡",
+    title: "Fast Development",
+    desc: "Building high-performance applications with modern frameworks and clean architecture."
+  },
+  {
+    icon: "🎨",
+    title: "Clean Design",
+    desc: "Creating visually polished interfaces with attention to detail and user experience."
+  },
+  {
+    icon: "🔧",
+    title: "Full Stack",
+    desc: "End-to-end development from database design to frontend implementation."
+  },
+  {
+    icon: "🚀",
+    title: "Always Learning",
+    desc: "Continuously expanding skills in new technologies and development methodologies."
+  }
 ];
 ---
 
 <BaseLayout lang="en" title={profile.fullName} description={`${profile.tagline.en} · ${profile.subtitle.en}`}>
-	<div class="home-container">
-		<!-- Hero Section -->
-		<section class="hero">
-			<header class="hero-header">
-				<div class="logo">straiko</div>
-				<div class="header-controls">
-					<a href={`${import.meta.env.BASE_URL}/ru/`} class="lang-toggle" aria-label="Switch to Russian">RU</a>
-					<button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-						<span class="theme-icon">🌙</span>
-					</button>
-				</div>
-			</header>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">straiko</a>
+    <div class="nav-controls">
+      <a href="/ru/" class="nav-btn">RU</a>
+      <button id="themeToggle" class="nav-btn" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
 
-			<div class="hero-profile">
-				<div class="profile-image-container">
-					<!-- High-end Terminal SVG Graphic -->
-					<svg class="profile-avatar-graphic" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" opacity="0.3" />
-						<path d="M30 40L45 50L30 60" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-						<line x1="52" y1="60" x2="72" y2="60" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
-					</svg>
-				</div>
-				<div class="profile-text">
-					<h1 class="profile-name">{profile.fullName}</h1>
-					<div class="social-links">
-						{profile.links.map((l) => (
-							<a class="social-icon" href={l.href} target="_blank" rel="noreferrer" aria-label={l.label}>
-								{l.label}
-							</a>
-						))}
-					</div>
-					<p class="profile-role">{profile.tagline.en}</p>
-					<p class="profile-description">{profile.subtitle.en}</p>
-					<p class="profile-location">
-						<span class="location-icon">📍</span> {profile.location.en}
-					</p>
-				</div>
-			</div>
-		</section>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">Open for opportunities</div>
+    <h1 class="hero-title">Daniil Starikov</h1>
+    <p class="hero-subtitle">IT Student & Developer building fast, modern, and highly visual applications. Currently focused on full-stack development and system architecture.</p>
+    <div class="hero-links">
+      <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hero-link">
+        GitHub ↗
+      </a>
+      <a href="mailto:Daniilstarikov2017@gmail.com" class="hero-link hero-link-secondary">
+        Contact
+      </a>
+    </div>
+    <div class="code-block">
+      <span class="code-prefix">~$</span>
+      <span class="code-text">curl -fsSL https://straiko.me/install | bash</span>
+      <button class="code-copy" onclick="navigator.clipboard.writeText('curl -fsSL https://straiko.me/install | bash')">
+        📋
+      </button>
+    </div>
+  </section>
 
-		<!-- Bento Grid -->
-		<div class="bento-grid initial-state" id="bentoGrid" role="region" aria-label="Portfolio sections">
-			<!-- About me folder -->
-			<div class="bento-item item-about folder-item" tabindex="0" data-folder="about" role="button" aria-expanded="false" aria-controls="aboutContent" aria-label="Open About Me section">
-				<div class="folder-tab">About me</div>
-			</div>
+  <!-- Features -->
+  <section class="features">
+    <div class="features-header">
+      <h2 class="features-title">What I Do</h2>
+      <p class="features-subtitle">Building modern solutions with clean code and thoughtful design</p>
+    </div>
+    <div class="features-grid">
+      {features.map((f) => (
+        <div class="feature-card">
+          <div class="feature-icon">{f.icon}</div>
+          <h3 class="feature-title">{f.title}</h3>
+          <p class="feature-desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-			<!-- About me expanded content: Interactive Skills Dashboard -->
-			<div class="folder-content about-content" id="aboutContent" style="display: none;" role="region" aria-label="Information about me">
-				<div class="skills-dashboard">
-					<!-- Education -->
-					<div class="skills-category">
-						<div class="skills-header-row">
-							<span class="skills-header-icon">🎓</span>
-							<h3 class="skills-header-title">Education</h3>
-						</div>
-						<div class="skills-grid-new">
-							<div class="skill-visual-card" style="display: flex; gap: 1rem; align-items: center;">
-								<span style="font-size: 2.25rem;">🏫</span>
-								<div>
-									<h4 class="card-title">МКАГ</h4>
-									<p class="card-subtitle">Student of Information Technology Specialization</p>
-								</div>
-							</div>
-						</div>
-					</div>
+  <!-- Projects -->
+  <section class="projects">
+    <div class="projects-header">
+      <h2 class="projects-title">Projects</h2>
+      <p class="projects-subtitle">Selected works and open source contributions</p>
+    </div>
+    <div class="projects-grid">
+      {projects.map((p) => (
+        <div class="project-card">
+          {p.badge && <span class="project-badge">{p.badge}</span>}
+          <h3 class="project-title">{p.title}</h3>
+          <p class="project-desc">{p.description.en}</p>
+          {p.tags && (
+            <div class="project-tags">
+              {p.tags.map((tag) => (
+                <span class="project-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+          <div class="project-links">
+            <a class="project-link" href={p.href} target="_blank" rel="noreferrer">
+              {p.ctaLabel?.en ?? "view →"}
+            </a>
+            {p.liveUrl && (
+              <a class="project-link project-link-live" href={p.liveUrl} target="_blank" rel="noreferrer">
+                live demo →
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 
-					<!-- Visual Skills Matrix -->
-					<div class="skills-category">
-						<div class="skills-header-row">
-							<span class="skills-header-icon">⚡</span>
-							<h3 class="skills-header-title">Technical Skills Matrix</h3>
-						</div>
-						<div class="skills-grid-new">
-							{skillsMap.map((sk) => (
-								<div class="skill-visual-card">
-									<div class="skill-info">
-										<span class="skill-name">{sk.icon} {sk.name}</span>
-										<span class="skill-percent">{sk.percent}%</span>
-									</div>
-									<div class="skill-bar-bg">
-										<div class="skill-bar-fill" style={`width: ${sk.percent}%`}></div>
-									</div>
-									<div class="skill-tags-inline">
-										{sk.tags.map((tg) => (
-											<span class="skill-tag-micro">{tg}</span>
-										))}
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			</div>
+  <!-- Skills -->
+  <section class="skills">
+    <div class="skills-header">
+      <h2 class="skills-title">Technical Skills</h2>
+      <p class="skills-subtitle">Core competencies and technologies I work with</p>
+    </div>
+    <div class="skills-grid">
+      {skillsMap.map((sk) => (
+        <div class="skill-card">
+          <div class="skill-icon">{sk.icon}</div>
+          <h3 class="skill-name">{sk.name}</h3>
+          <div class="skill-bar">
+            <div class="skill-bar-fill" style={`width: ${sk.percent}%`}></div>
+          </div>
+          <div class="skill-tags">
+            {sk.tags.map((tg) => (
+              <span class="skill-tag">{tg}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 
-			<!-- Projects folder -->
-			<div class="bento-item item-projects folder-item" tabindex="0" data-folder="projects" role="button" aria-expanded="false" aria-controls="projectsContent" aria-label="Open Projects section">
-				<div class="folder-tab">Projects</div>
-			</div>
+  <!-- Blog -->
+  {blogPosts.length > 0 && (
+    <section class="blog">
+      <div class="blog-header">
+        <h2 class="blog-title">Blog</h2>
+        <p class="blog-subtitle">Thoughts on development and learning</p>
+      </div>
+      <div class="blog-list">
+        {blogPosts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="blog-item">
+            <div class="blog-item-header">
+              <h3 class="blog-item-title">{post.title}</h3>
+              <span class="blog-item-date">{post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            </div>
+            <p class="blog-item-desc">{post.description}</p>
+            <div class="blog-item-tags">
+              {post.tags?.map((tag) => (
+                <span class="blog-tag">{tag}</span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
-			<!-- Projects expanded content -->
-			<div class="folder-content projects-content" id="projectsContent" style="display: none;" role="region" aria-label="My projects">
-				<div class="projects-list">
-						{projects.map((p) => (
-							<div class="project-item">
-								<div class="project-header">
-									<h3 class="project-title">{p.title}</h3>
-									{p.badge && <span class="project-badge">{p.badge}</span>}
-								</div>
-								<p class="project-description">{p.description.en}</p>
-								{p.tags && (
-									<div class="project-tags-list">
-										{p.tags.map((tag) => (
-											<span class="project-tag-item">{tag}</span>
-										))}
-									</div>
-								)}
-								<div class="project-links">
-									<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
-										{p.ctaLabel?.en ?? "open →"}
-									</a>
-									{p.liveUrl && (
-										<a class="project-link project-link-live" href={p.liveUrl} target="_blank" rel="noreferrer">
-											live demo →
-										</a>
-									)}
-								</div>
-							</div>
-						))}
-				</div>
-			</div>
+  <!-- Terminal -->
+  <section class="terminal-section">
+    <div class="terminal-header">
+      <h2 class="terminal-title">Interactive CLI</h2>
+      <p class="terminal-subtitle">Type <strong>help</strong> to see available commands</p>
+    </div>
+    <div class="terminal-window">
+      <div class="terminal-topbar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+      </div>
+      <div id="terminal-body" class="terminal-body">
+        <div class="terminal-line terminal-output-accent">Welcome to Daniil Starikov's Portfolio CLI (v2.1.0)</div>
+        <div class="terminal-line">Type <span class="terminal-output-success">help</span> to view all available commands.</div>
+        <div id="terminal-output-container"></div>
+        <div class="terminal-input-line">
+          <span class="terminal-prompt">straiko@portfolio:~$</span>
+          <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
+        </div>
+      </div>
+    </div>
+  </section>
 
-			<!-- Blog folder -->
-			<div class="bento-item item-blog folder-item" tabindex="0" data-folder="blog" role="button" aria-expanded="false" aria-controls="blogContent" aria-label="Open Blog section">
-				<div class="folder-tab">Blog</div>
-			</div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="footer-link">GitHub</a>
+        <a href="mailto:Daniilstarikov2017@gmail.com" class="footer-link">Email</a>
+        <a href="https://github.com/Straiko?tab=repositories" target="_blank" rel="noreferrer" class="footer-link">Projects</a>
+      </div>
+      <p class="footer-copy">© 2026 {profile.fullName}. All rights reserved.</p>
+    </div>
+  </footer>
 
-			<!-- Blog expanded content -->
-			<div class="folder-content blog-content" id="blogContent" style="display: none;" role="region" aria-label="Blog posts">
-				<div class="blog-list">
-					{blogPosts.map((post) => (
-						<a href={`${import.meta.env.BASE_URL}/blog/${post.slug}`} class="blog-item">
-							<div class="blog-item-header">
-								<h3 class="blog-item-title">{post.title}</h3>
-								<span class="blog-item-date">{post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-							</div>
-							<p class="blog-item-description">{post.description}</p>
-							<div class="blog-item-tags">
-								{post.tags?.map((tag) => (
-									<span class="blog-tag">{tag}</span>
-								))}
-							</div>
-						</a>
-					))}
-				</div>
-			</div>
+  <script is:inline>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle?.querySelector('.theme-icon');
+    const html = document.documentElement;
 
-			<!-- Retro Terminal folder -->
-			<div class="bento-item item-terminal folder-item" tabindex="0" data-folder="terminal" role="button" aria-expanded="false" aria-controls="terminalContent" aria-label="Open CLI Terminal section">
-				<div class="folder-tab">Terminal</div>
-			</div>
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    if (themeIcon) themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
 
-			<!-- Retro Terminal expanded content -->
-			<div class="folder-content terminal-content" id="terminalContent" style="display: none;" role="region" aria-label="Interactive Terminal Console">
-				<div class="terminal-window">
-					<div class="terminal-topbar">
-						<div class="terminal-controls">
-							<span class="terminal-dot red"></span>
-							<span class="terminal-dot yellow"></span>
-							<span class="terminal-dot green"></span>
-						</div>
-						<div class="terminal-title">straiko@portfolio:~</div>
-						<div style="width: 42px;"></div>
-					</div>
-					<canvas id="terminal-matrix" class="terminal-matrix-canvas"></canvas>
-					<div id="terminal-body" class="terminal-body">
-						<div class="terminal-line terminal-output-accent">Welcome to Daniil Starikov's Interactive Portfolio CLI (v2.1.0)</div>
-						<div class="terminal-line">Type <span class="terminal-output-success">help</span> to view all available commands.</div>
-						<div id="terminal-output-container"></div>
-						<div class="terminal-input-line">
-							<span class="terminal-prompt">straiko@portfolio:~$</span>
-							<div class="terminal-caret-wrapper">
-								<input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
-								<span id="terminal-caret" class="terminal-caret"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    themeToggle?.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      if (themeIcon) themeIcon.textContent = next === 'light' ? '🌙' : '☀️';
+    });
 
-		<!-- Footer -->
-		<footer class="contact">
-			<div class="contact-content">
-				<div class="footer-info">
-					<p class="copyright">© 2026 {profile.fullName}</p>
-				</div>
-			</div>
-		</footer>
-	</div>
+    document.addEventListener('DOMContentLoaded', () => {
+      const termInput = document.getElementById('terminal-input');
+      const termOutput = document.getElementById('terminal-output-container');
+      const termBody = document.getElementById('terminal-body');
 
-	<script is:inline>
-		// Theme toggle
-		const themeToggle = document.getElementById('themeToggle');
-		const themeIcon = themeToggle?.querySelector('.theme-icon');
-		const html = document.documentElement;
+      function writeLine(text, className = '') {
+        const line = document.createElement('div');
+        line.className = 'terminal-line ' + className;
+        line.textContent = text;
+        termOutput.appendChild(line);
+        termBody.scrollTop = termBody.scrollHeight;
+      }
 
-		const savedTheme = localStorage.getItem('theme') || 'dark';
-		html.setAttribute('data-theme', savedTheme);
-		if (themeIcon) {
-			themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
-		}
+      termInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = termInput.value.trim().toLowerCase();
+          termInput.value = '';
+          if (!cmd) return;
 
-		themeToggle?.addEventListener('click', () => {
-			const currentTheme = html.getAttribute('data-theme');
-			const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          writeLine(`straiko@portfolio:~$ ${cmd}`, 'terminal-input-line');
 
-			html.setAttribute('data-theme', newTheme);
-			localStorage.setItem('theme', newTheme);
+          switch (cmd) {
+            case 'help':
+              writeLine('Available commands:', 'terminal-output-accent');
+              writeLine('  about    - Information about Daniil Starikov');
+              writeLine('  skills   - List of primary IT competencies');
+              writeLine('  projects - View developed applications');
+              writeLine('  blog     - List of recent engineering notes');
+              writeLine('  contact  - Display communication handles');
+              writeLine('  clear    - Clear terminal logs');
+              break;
+            case 'about':
+              writeLine('Name: Daniil Starikov');
+              writeLine('Status: IT Student at МКАГ (Moscow, Russia)');
+              writeLine('Goal: Building fast, modern, and highly visual applications.');
+              break;
+            case 'skills':
+              writeLine('IT Competencies:', 'terminal-output-accent');
+              writeLine('  - Languages: Python, JavaScript, C++, C, PHP, Node.js');
+              writeLine('  - Web Tech: HTML, CSS, SQL, React.js, PHP Backend');
+              writeLine('  - Databases: SQL, Data Modeling, Database Design');
+              writeLine('  - Network: Computer Networks, VLAN, Linux');
+              break;
+            case 'projects':
+              writeLine('Developed projects:', 'terminal-output-accent');
+              writeLine('  [1] Olympus (fast_trans) - Desktop translator with AI');
+              writeLine('  [2] SHK Bot             - Telegram barcode/QR scanner');
+              writeLine('  [3] easy-php             - PHP utility collection');
+              writeLine('  [4] 2-work-52            - JavaScript practice tasks');
+              break;
+            case 'blog':
+              writeLine('Recent blog entries:', 'terminal-output-accent');
+              writeLine('  - Starting with Astro');
+              writeLine('  - Notes on learning');
+              writeLine('  - How I choose projects');
+              break;
+            case 'contact':
+              writeLine('Contact Channels:', 'terminal-output-accent');
+              writeLine('  Email: Daniilstarikov2017@gmail.com');
+              writeLine('  GitHub: https://github.com/Straiko');
+              break;
+            case 'clear':
+              termOutput.innerHTML = '';
+              break;
+            default:
+              writeLine(`Command not found: "${cmd}". Type "help" for a list of commands.`, 'terminal-output-error');
+          }
+        }
+      });
 
-			if (themeIcon) {
-				themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
-			}
-		});
-
-		// Folder toggle functionality (with keyboard accessibility)
-		document.addEventListener('DOMContentLoaded', () => {
-			const grid = document.getElementById('bentoGrid');
-			const folders = document.querySelectorAll('.folder-item');
-			let currentOpen = null;
-
-			const toggleFolder = (folder) => {
-				const folderType = folder.getAttribute('data-folder');
-				const content = document.getElementById(`${folderType}Content`);
-
-				if (currentOpen === folderType) {
-					if (content) content.style.display = 'none';
-					if (grid) {
-						grid.classList.remove('expanded-state');
-						grid.classList.add('initial-state');
-					}
-					folder.setAttribute('aria-expanded', 'false');
-					currentOpen = null;
-				} else {
-					if (currentOpen) {
-						const prevContent = document.getElementById(`${currentOpen}Content`);
-						if (prevContent) prevContent.style.display = 'none';
-						const prevFolder = document.querySelector(`[data-folder="${currentOpen}"]`);
-						if (prevFolder) prevFolder.setAttribute('aria-expanded', 'false');
-					}
-
-					if (content) content.style.display = 'block';
-					if (grid) {
-						grid.classList.remove('initial-state');
-						grid.classList.add('expanded-state');
-					}
-					folder.setAttribute('aria-expanded', 'true');
-					currentOpen = folderType;
-
-					// Focus terminal input if terminal is opened
-					if (folderType === 'terminal') {
-						setTimeout(() => {
-							document.getElementById('terminal-input')?.focus();
-						}, 100);
-					}
-				}
-			};
-
-			folders.forEach(folder => {
-				folder.addEventListener('click', () => {
-					toggleFolder(folder);
-				});
-
-				folder.addEventListener('keydown', (e) => {
-					if (e.key === 'Enter' || e.key === ' ') {
-						e.preventDefault();
-						toggleFolder(folder);
-					}
-				});
-			});
-
-			// Retro Terminal Functionality
-			const termInput = document.getElementById('terminal-input');
-			const termOutput = document.getElementById('terminal-output-container');
-			const termWindow = document.getElementById('terminal-body');
-			const termMatrix = document.getElementById('terminal-matrix');
-
-			let matrixInterval = null;
-
-			function handleMatrix() {
-				if (matrixInterval) {
-					clearInterval(matrixInterval);
-					matrixInterval = null;
-					const ctx = termMatrix.getContext('2d');
-					ctx.clearRect(0, 0, termMatrix.width, termMatrix.height);
-					return "Matrix digital rain deactivated.";
-				} else {
-					const ctx = termMatrix.getContext('2d');
-					termMatrix.width = termMatrix.parentElement.offsetWidth;
-					termMatrix.height = 380;
-					
-					const chars = '01010101ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺ'.split('');
-					const fontSize = 14;
-					const columns = termMatrix.width / fontSize;
-					const rainDrops = Array(Math.floor(columns)).fill(1);
-					
-					ctx.font = fontSize + 'px monospace';
-					
-					function draw() {
-						ctx.fillStyle = 'rgba(2, 6, 23, 0.05)';
-						ctx.fillRect(0, 0, termMatrix.width, termMatrix.height);
-						ctx.fillStyle = '#06b6d4';
-						
-						for (let i = 0; i < rainDrops.length; i++) {
-							const text = chars[Math.floor(Math.random() * chars.length)];
-							ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-							
-							if (rainDrops[i] * fontSize > termMatrix.height && Math.random() > 0.975) {
-								rainDrops[i] = 0;
-							}
-							rainDrops[i]++;
-						}
-					}
-					
-					matrixInterval = setInterval(draw, 30);
-					return "Matrix digital rain activated! Press matrix again to close.";
-				}
-			}
-
-			function writeLine(text, className = '') {
-				const line = document.createElement('div');
-				line.className = 'terminal-line ' + className;
-				line.textContent = text;
-				termOutput.appendChild(line);
-				termWindow.scrollTop = termWindow.scrollHeight;
-			}
-
-			termInput?.addEventListener('keydown', (e) => {
-				if (e.key === 'Enter') {
-					const cmdVal = termInput.value.trim();
-					termInput.value = '';
-					
-					if (!cmdVal) return;
-					
-					writeLine(`straiko@portfolio:~$ ${cmdVal}`, 'terminal-input-line');
-					
-					const args = cmdVal.toLowerCase().split(' ');
-					const cmd = args[0];
-					
-					switch (cmd) {
-						case 'help':
-							writeLine('Available commands:', 'terminal-output-accent');
-							writeLine('  about    - Information about Daniil Starikov');
-							writeLine('  skills   - List of primary IT competencies');
-							writeLine('  projects - View developed applications and GitHub references');
-							writeLine('  blog     - List of recent engineering notes');
-							writeLine('  contact  - Display official communication handles');
-							writeLine('  matrix   - Toggle retro cyber code rain');
-							writeLine('  clear    - Clear terminal logs');
-							break;
-						case 'about':
-							writeLine('Name: Daniil Starikov');
-							writeLine('Status: IT Student at МКАГ (Moscow, Russia)');
-							writeLine('Goal: Building fast, modern, and highly visual applications.');
-							break;
-						case 'skills':
-							writeLine('IT Competencies:', 'terminal-output-accent');
-							writeLine('  - Languages: Python, JavaScript, C++, C, PHP, Node.js (45%)');
-							writeLine('  - Web Tech: HTML, CSS, SQL, React.js, PHP Backend (60%)');
-							writeLine('  - Databases: Model schemas, database query optimization (70%)');
-							writeLine('  - Network: Router config, VLAN setup, systems admin (40%)');
-							break;
-						case 'projects':
-							writeLine('Developed projects:', 'terminal-output-accent');
-							writeLine('  [1] Olympus (fast_trans) - PyQt6 + AI desktop translator');
-							writeLine('  [2] SHK Bot             - Telegram barcode/QR scanner bot');
-							writeLine('  [3] easy-php             - Curated backend utility sets');
-							writeLine('  [4] 2-work-52            - Advanced JS sandbox and tasks');
-							writeLine('Type any name in your browser address to open.');
-							break;
-						case 'blog':
-							writeLine('Recent blog entries:', 'terminal-output-accent');
-							writeLine('  - Starting with Astro   (May 2026)');
-							writeLine('  - Notes on learning     (April 2026)');
-							writeLine('  - How I choose projects (March 2026)');
-							break;
-						case 'contact':
-							writeLine('Contact Channels:', 'terminal-output-accent');
-							writeLine('  Email: Daniilstarikov2017@gmail.com');
-							writeLine('  GitHub: https://github.com/Straiko');
-							break;
-						case 'matrix':
-							const res = handleMatrix();
-							writeLine(res, 'terminal-output-success');
-							break;
-						case 'clear':
-							termOutput.innerHTML = '';
-							break;
-						default:
-							writeLine(`Command not found: "${cmd}". Type "help" for a list of valid commands.`, 'terminal-output-error');
-					}
-				}
-			});
-
-			// Click terminal body to focus input
-			document.querySelector('.terminal-window')?.addEventListener('click', () => {
-				termInput?.focus();
-			});
-		});
-	</script>
+      document.querySelector('.terminal-window')?.addEventListener('click', () => termInput?.focus());
+    });
+  </script>
 </BaseLayout>
