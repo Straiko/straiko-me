@@ -15,7 +15,8 @@ export const profile = {
   avatar: "/avatar.jpg",
   links: [
     { label: "GitHub", href: "https://github.com/Straiko" },
-    { label: "Email", href: "mailto:Daniilstarikov2017@gmail.com" }
+    { label: "Email", href: "mailto:Daniilstarikov2017@gmail.com" },
+    { label: "Projects", href: "https://github.com/Straiko?tab=repositories" }
   ],
   about: [
     {

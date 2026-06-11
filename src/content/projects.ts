@@ -6,6 +6,7 @@ export type Project = {
     en: string;
   };
   href: string;
+  liveUrl?: string;
   ctaLabel?: {
     ru: string;
     en: string;
@@ -23,11 +24,26 @@ export const projects: Project[] = [
       en: "Desktop app for instant text translation and voice input with AI enhancement. PyQt6 + Speech Recognition + AI APIs."
     },
     href: "https://github.com/Straiko/fast_trans",
+    liveUrl: "https://straiko.github.io/fast_trans/",
     ctaLabel: {
       ru: "открыть на GitHub →",
       en: "view on GitHub →"
     },
     tags: ["PyQt6", "AI APIs", "Speech Recognition", "Python"]
+  },
+  {
+    badge: "NEW",
+    title: "SHK Bot",
+    description: {
+      ru: "Telegram-бот для сканирования и генерации штрих-кодов (Code128) и QR-кодов с OCR-fallback'ом.",
+      en: "Telegram bot for scanning and generating barcodes (Code128) and QR codes with OCR fallback."
+    },
+    href: "https://github.com/Straiko/shk",
+    ctaLabel: {
+      ru: "открыть на GitHub →",
+      en: "view on GitHub →"
+    },
+    tags: ["Telegram Bot", "OCR", "Python", "QR Codes"]
   },
   {
     title: "easy-php",

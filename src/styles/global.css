@@ -945,6 +945,28 @@ body::after {
   color: #818cf8;
   font-family: var(--font-family-display);
   font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.project-link:hover {
+  color: #a5b4fc;
+  transform: translateX(3px);
+}
+
+.project-links {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.project-link-live {
+  color: #34d399;
+}
+
+.project-link-live:hover {
+  color: #6ee7b7;
+}
   font-weight: 700;
 }
 

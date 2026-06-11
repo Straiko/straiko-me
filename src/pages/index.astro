@@ -133,25 +133,32 @@ const skillsMap = [
 			<!-- Projects expanded content -->
 			<div class="folder-content projects-content" id="projectsContent" style="display: none;" role="region" aria-label="My projects">
 				<div class="projects-list">
-					{projects.map((p) => (
-						<div class="project-item">
-							<div class="project-header">
-								<h3 class="project-title">{p.title}</h3>
-								{p.badge && <span class="project-badge">{p.badge}</span>}
-							</div>
-							<p class="project-description">{p.description.en}</p>
-							{p.tags && (
-								<div class="project-tags-list">
-									{p.tags.map((tag) => (
-										<span class="project-tag-item">{tag}</span>
-									))}
+						{projects.map((p) => (
+							<div class="project-item">
+								<div class="project-header">
+									<h3 class="project-title">{p.title}</h3>
+									{p.badge && <span class="project-badge">{p.badge}</span>}
 								</div>
-							)}
-							<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
-								{p.ctaLabel?.en ?? "open →"}
-							</a>
-						</div>
-					))}
+								<p class="project-description">{p.description.en}</p>
+								{p.tags && (
+									<div class="project-tags-list">
+										{p.tags.map((tag) => (
+											<span class="project-tag-item">{tag}</span>
+										))}
+									</div>
+								)}
+								<div class="project-links">
+									<a class="project-link" href={p.href} target="_blank" rel="noreferrer">
+										{p.ctaLabel?.en ?? "open →"}
+									</a>
+									{p.liveUrl && (
+										<a class="project-link project-link-live" href={p.liveUrl} target="_blank" rel="noreferrer">
+											live demo →
+										</a>
+									)}
+								</div>
+							</div>
+						))}
 				</div>
 			</div>
 
@@ -398,8 +405,9 @@ const skillsMap = [
 						case 'projects':
 							writeLine('Developed projects:', 'terminal-output-accent');
 							writeLine('  [1] Olympus (fast_trans) - PyQt6 + AI desktop translator');
-							writeLine('  [2] easy-php             - Curated backend utility sets');
-							writeLine('  [3] 2-work-52            - Advanced JS sandbox and tasks');
+							writeLine('  [2] SHK Bot             - Telegram barcode/QR scanner bot');
+							writeLine('  [3] easy-php             - Curated backend utility sets');
+							writeLine('  [4] 2-work-52            - Advanced JS sandbox and tasks');
 							writeLine('Type any name in your browser address to open.');
 							break;
 						case 'blog':
