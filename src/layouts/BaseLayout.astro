@@ -33,7 +33,7 @@ const ogImage = image || withBase("/og-image.jpg");
 const ogDescription = description || (isEn ? `${profile.tagline.en} · ${profile.subtitle.en}` : `${profile.tagline.ru} · ${profile.subtitle.ru}`);
 ---
 
-<html lang={isEn ? "en" : "ru"}>
+<html lang={isEn ? "en" : "ru"} data-base={baseNoTrail}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />

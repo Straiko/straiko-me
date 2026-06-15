@@ -49,14 +49,17 @@ const features = [
     desc: "Расширение навыков в новых технологиях и методологиях разработки."
   }
 ];
+
+const base = import.meta.env.BASE_URL;
+const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
 ---
 
 <BaseLayout lang="ru" title={profile.fullName} description={`${profile.tagline.ru} · ${profile.subtitle.ru}`}>
   <!-- Навигация -->
   <nav class="nav">
-    <a href="/ru/" class="nav-logo">straiko</a>
+    <a href={`${baseNoSlash}/ru/`} class="nav-logo">straiko</a>
     <div class="nav-controls">
-      <a href="/" class="nav-btn">EN</a>
+      <a href={`${baseNoSlash}/`} class="nav-btn">EN</a>
       <button id="themeToggle" class="nav-btn" aria-label="Переключить тему">
         <span class="theme-icon">🌙</span>
       </button>
@@ -162,7 +165,7 @@ const features = [
       </div>
       <div class="blog-list">
         {blogPosts.map((post) => (
-          <a href={`/ru/blog/${post.slug}`} class="blog-item">
+          <a href={`${baseNoSlash}/ru/blog/${post.slug}`} class="blog-item">
             <div class="blog-item-header">
               <h3 class="blog-item-title">{post.title}</h3>
               <span class="blog-item-date">{post.pubDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'short', day: 'numeric' })}</span>

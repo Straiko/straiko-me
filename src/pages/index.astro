@@ -49,14 +49,17 @@ const features = [
     desc: "Continuously expanding skills in new technologies and development methodologies."
   }
 ];
+
+const base = import.meta.env.BASE_URL;
+const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
 ---
 
 <BaseLayout lang="en" title={profile.fullName} description={`${profile.tagline.en} · ${profile.subtitle.en}`}>
   <!-- Navigation -->
   <nav class="nav">
-    <a href="/" class="nav-logo">straiko</a>
+    <a href={`${baseNoSlash}/`} class="nav-logo">straiko</a>
     <div class="nav-controls">
-      <a href="/ru/" class="nav-btn">RU</a>
+      <a href={`${baseNoSlash}/ru/`} class="nav-btn">RU</a>
       <button id="themeToggle" class="nav-btn" aria-label="Toggle theme">
         <span class="theme-icon">🌙</span>
       </button>
@@ -162,7 +165,7 @@ const features = [
       </div>
       <div class="blog-list">
         {blogPosts.map((post) => (
-          <a href={`/blog/${post.slug}`} class="blog-item">
+          <a href={`${baseNoSlash}/blog/${post.slug}`} class="blog-item">
             <div class="blog-item-header">
               <h3 class="blog-item-title">{post.title}</h3>
               <span class="blog-item-date">{post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
@@ -221,7 +224,8 @@ const features = [
       if (saved) return;
       var nav = navigator.language || navigator.userLanguage || '';
       if (nav.toLowerCase().startsWith('ru')) {
-        window.location.replace('./ru/');
+        var base = document.documentElement.getAttribute('data-base') || '';
+        window.location.replace(base + '/ru/');
       }
     })();
 
