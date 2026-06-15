@@ -216,6 +216,15 @@ const features = [
   </footer>
 
   <script is:inline>
+    (function() {
+      var saved = localStorage.getItem('lang');
+      if (saved) return;
+      var nav = navigator.language || navigator.userLanguage || '';
+      if (nav.toLowerCase().startsWith('ru')) {
+        window.location.replace('./ru/');
+      }
+    })();
+
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle?.querySelector('.theme-icon');
     const html = document.documentElement;
