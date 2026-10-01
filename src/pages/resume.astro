@@ -3,196 +3,549 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { profile } from "../content/profile";
 
 const base = import.meta.env.BASE_URL;
-const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
-const withBase = (p: string) => `${baseNoTrail}${p}`;
+const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
+const withBase = (p: string) => `${baseNoSlash}${p}`;
 ---
 
 <BaseLayout lang="en" title="Resume — Daniil Starikov" description="Resume of Software Engineer specializing in Python, C#, PyQt6, AI APIs, Linux.">
-  <div class="min-h-screen py-10 px-4 max-w-4xl mx-auto">
-    <!-- Navigation back & download -->
-    <div class="flex items-center justify-between mb-8 pb-4 border-b border-[var(--border)]">
-      <a class="text-sm font-medium text-[var(--accent-light)] hover:underline flex items-center gap-1" href={withBase("/")}>
-        ← Back to home
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href={`${baseNoSlash}/`} class="nav-logo">straiko</a>
+    <div class="nav-controls">
+      <a href={withBase("/Daniil_Starikov_Resume.pdf")} download="Daniil_Starikov_Resume.pdf" class="nav-btn nav-btn-primary">
+        ↓ Download PDF
       </a>
-      <a
-        href={withBase("/Daniil_Starikov_Resume.pdf")}
-        download="Daniil_Starikov_Resume.pdf"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-sm font-semibold transition-colors shadow-sm"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        Download Resume (PDF)
-      </a>
+      <a href={`${baseNoSlash}/ru/resume/`} class="nav-btn">RU</a>
+      <a href={`${baseNoSlash}/`} class="nav-btn">Home</a>
+      <button id="themeToggle" class="nav-btn" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
     </div>
+  </nav>
 
+  <main class="resume-wrapper">
     <!-- Header -->
-    <header class="mb-10">
-      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent-glow)] text-[var(--accent-light)] border border-[var(--accent)] mb-3">
-        Open for opportunities
-      </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight mb-2">
-        Daniil Starikov
-      </h1>
-      <p class="text-lg font-medium text-[var(--accent-light)] mb-3">
-        Python Developer / Software Engineer (Desktop, Automation & AI Solutions)
-      </p>
-      <p class="text-sm text-[var(--text-secondary)] mb-4">
-        📍 Moscow, Russia · Open to remote work / hybrid
-      </p>
+    <header class="resume-hero">
+      <div class="resume-badge">Open for opportunities</div>
+      <h1 class="resume-name">Daniil Starikov</h1>
+      <p class="resume-role">Python Developer / Software Engineer (Desktop, Automation & AI Solutions)</p>
+      <p class="resume-location">📍 Moscow, Russia · Open to remote work / hybrid</p>
 
-      <div class="flex flex-wrap gap-4 text-sm text-[var(--text-secondary)] pt-2 border-t border-[var(--border)]">
-        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          Telegram: @Gram_vvallet
+      <div class="resume-contacts">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="contact-pill">
+          <span class="contact-icon">✈️</span> Telegram: @Gram_vvallet
         </a>
-        <a href="mailto:Daniilstarikov2017@gmail.com" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          Daniilstarikov2017@gmail.com
+        <a href="mailto:Daniilstarikov2017@gmail.com" class="contact-pill">
+          <span class="contact-icon">✉️</span> Daniilstarikov2017@gmail.com
         </a>
-        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          GitHub: @Straiko
+        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="contact-pill">
+          <span class="contact-icon">🐙</span> GitHub: @Straiko
         </a>
-        <a href="https://straiko.github.io/straiko-me/" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          Portfolio: straiko.me
+        <a href="https://straiko.github.io/straiko-me/" target="_blank" rel="noreferrer" class="contact-pill">
+          <span class="contact-icon">🌐</span> straiko.github.io/straiko-me
         </a>
       </div>
     </header>
 
-    <!-- Summary -->
-    <section class="mb-10 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">About Me</h2>
-      <p class="text-[var(--text-secondary)] leading-relaxed text-sm sm:text-base">
-        Software and automation developer specializing in <strong>Python</strong> and <strong>C# / .NET</strong>. Experienced in building robust desktop applications, Telegram bots, LLM integrations, and OCR services. Dedicated to engineering excellence: modular software architecture, comprehensive automated test suites (<strong>105+ pytest tests</strong>), strict typing (<strong>mypy</strong>), automated linting (<strong>ruff</strong>), and CI/CD pipelines (<strong>GitHub Actions</strong>). Proficient in Linux system tooling and runtime reverse-engineering.
-      </p>
+    <!-- About Me -->
+    <section class="resume-section">
+      <div class="section-badge">About Me</div>
+      <div class="resume-card resume-about-card">
+        <p>
+          Software and automation developer specializing in <strong>Python</strong> and <strong>C# / .NET</strong>. Experienced in building robust desktop applications, Telegram bots, LLM integrations, and OCR services.
+        </p>
+        <p style="margin-top: 0.75rem;">
+          Dedicated to engineering excellence: modular software architecture, comprehensive automated test suites (<strong>105+ pytest tests</strong>), strict typing (<strong>mypy</strong>), automated linting (<strong>ruff</strong>), and CI/CD pipelines (<strong>GitHub Actions</strong>). Proficient in Linux system tooling and runtime reverse-engineering.
+        </p>
+      </div>
     </section>
 
-    <!-- Skills -->
-    <section class="mb-10">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Technical Skills</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Languages</div>
-          <div class="text-xs text-[var(--text-secondary)]">Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, basic Rust</div>
+    <!-- Technical Skills -->
+    <section class="resume-section">
+      <div class="section-badge">Technical Skills</div>
+      <div class="skills-layout">
+        <div class="skill-box">
+          <div class="skill-box-title">💻 Languages</div>
+          <div class="skill-box-desc">Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, basic Rust</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Desktop & System</div>
-          <div class="text-xs text-[var(--text-secondary)]">PyQt6, Qt Designer, Win32 API, Linux Input, Global Hotkeys, Clipboard, System Tray</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🖥️ Desktop & Systems</div>
+          <div class="skill-box-desc">PyQt6, Qt Designer, Win32 API, Linux Input, Global Hotkeys, Clipboard, System Tray</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Audio, Vision & AI</div>
-          <div class="text-xs text-[var(--text-secondary)]">Speech Recognition (STT), Audio Capture, OCR (Code128 / QR), OpenAI, Anthropic, Groq, Ollama</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🤖 Audio, Vision & AI</div>
+          <div class="skill-box-desc">Speech Recognition (STT), Audio Capture, OCR (Code128 / QR), OpenAI, Anthropic, Groq, Ollama</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Quality & Testing</div>
-          <div class="text-xs text-[var(--text-secondary)]">Pytest (105+ tests), MyPy (strict types), Ruff, Pre-commit, Git, Conventional Commits</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🧪 Quality & Testing</div>
+          <div class="skill-box-desc">Pytest (105+ tests), MyPy (strict types), Ruff, Pre-commit, Git, Conventional Commits</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">CI/CD & Packaging</div>
-          <div class="text-xs text-[var(--text-secondary)]">GitHub Actions, PyInstaller (standalone builds), Inno Setup (Windows installers)</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🚀 CI/CD & Packaging</div>
+          <div class="skill-box-desc">GitHub Actions, PyInstaller (standalone builds), Inno Setup (Windows installers)</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Reverse Engineering & Engines</div>
-          <div class="text-xs text-[var(--text-secondary)]">.NET Reflection, Unity assembly analysis (IL/C#), XPath/XML patching, engine modding</div>
+        <div class="skill-box">
+          <div class="skill-box-title">⚙️ Reverse Engineering & Engines</div>
+          <div class="skill-box-desc">.NET Reflection, Unity assembly analysis (IL/C#), XPath/XML patching, engine modding</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Bots & Web</div>
-          <div class="text-xs text-[var(--text-secondary)]">Telegram Bot API (aiogram), Telegram Web Apps (TWA), VK API, Astro, HTML/CSS/JS, React.js</div>
+        <div class="skill-box">
+          <div class="skill-box-title">📱 Bots & Web</div>
+          <div class="skill-box-desc">Telegram Bot API (aiogram), Telegram Web Apps (TWA), VK API, Astro, HTML/CSS/JS, React.js</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Databases & Infrastructure</div>
-          <div class="text-xs text-[var(--text-secondary)]">Database Design, SQL, 1C:Enterprise 8, Linux (Wayland/X11), Networking, VLANs</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🗄️ Databases & Infrastructure</div>
+          <div class="skill-box-desc">Database Design, SQL, 1C:Enterprise 8, Linux (Wayland/X11), Networking, VLANs</div>
         </div>
       </div>
     </section>
 
     <!-- Projects -->
-    <section class="mb-10">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Key Projects</h2>
-      <div class="space-y-6">
+    <section class="resume-section">
+      <div class="section-badge">Featured Projects</div>
+      <div class="projects-stack">
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              Olympus (fast_trans) — Multimodal Desktop Translation & Voice Assistant
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">Python · PyQt6 · CI/CD</span>
+        <!-- Project 1: Olympus -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">Olympus (fast_trans) — Multimodal Desktop Translation & Voice Assistant</h3>
+            <span class="project-pill">Python · PyQt6 · CI/CD</span>
           </div>
-          <div class="text-xs text-[var(--text-tertiary)] mb-3">
-            <a href="https://github.com/Straiko/fast_trans" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a> · 
-            <a href="https://straiko.github.io/fast_trans/" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Landing Page</a>
+          <div class="project-sublinks">
+            <a href="https://github.com/Straiko/fast_trans" target="_blank" rel="noreferrer">🐙 GitHub Repository ↗</a>
+            <span class="dot-sep">•</span>
+            <a href="https://straiko.github.io/fast_trans/" target="_blank" rel="noreferrer">🌐 Project Landing ↗</a>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>Designed a modular desktop application for instant text translation and voice input with AI text optimization.</li>
             <li>Implemented low-level global hotkey listeners and text substitution in active third-party windows with clipboard preservation.</li>
             <li>Built an audio pipeline: dynamic microphone selection, stream capture, speech-to-text (STT), AI error correction, and instant translation.</li>
             <li>Engineered for production reliability: <strong>105+ automated tests (pytest)</strong>, static type checking (<strong>MyPy</strong>), and <strong>Ruff</strong> linting.</li>
             <li>Configured <strong>GitHub Actions CI/CD</strong> for automated test execution and standalone executable / Inno Setup builds.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              SHK Bot / @Ozonbratik_bot — Barcode & QR Code OCR Generator Service
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">Python · OCR · Bots</span>
+        <!-- Project 2: SHK Bot -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">SHK Bot / @Ozonbratik_bot — Barcode & QR Code OCR Generator Service</h3>
+            <span class="project-pill">Python · OCR · Bots</span>
           </div>
-          <div class="text-xs text-[var(--text-tertiary)] mb-3">
-            <a href="https://t.me/Ozonbratik_bot" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Telegram Bot</a> · 
-            <a href="https://github.com/Straiko/shk" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a>
+          <div class="project-sublinks">
+            <a href="https://t.me/Ozonbratik_bot" target="_blank" rel="noreferrer">✈️ Open in Telegram ↗</a>
+            <span class="dot-sep">•</span>
+            <a href="https://github.com/Straiko/shk" target="_blank" rel="noreferrer">🐙 GitHub Repository ↗</a>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>Developed and deployed a service for scanning and generating barcodes (Code128) and QR codes.</li>
             <li>Engineered image preprocessing and OCR fallbacks for resilient reading of damaged or noisy codes.</li>
             <li>Shipped cross-platform bots (Telegram, VK, MAX) and a promotional landing page built with Astro.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              Game Engine Modding & Assembly Analysis (CryoArsenal)
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">C# · .NET · Unity · Reflection</span>
+        <!-- Project 3: Unity Modding -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">Game Engine Modding & Assembly Analysis (CryoArsenal)</h3>
+            <span class="project-pill">C# · .NET · Unity · Reflection</span>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>Utilized <strong>.NET Reflection</strong> to inspect compiled assemblies (<code>Assembly-CSharp.dll</code>), invoking internal members and controlling game entities.</li>
             <li>Built game extensions with custom cryo status mechanics, XUI custom components, and XPath patch configurations.</li>
           </ul>
-        </div>
+        </article>
+
+        <!-- Project 4: AI & Web -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">AI & Web Projects (Proverb Bot, SmartCart TWA, Exam Tickets Bot)</h3>
+            <span class="project-pill">LLM · Groq · TWA · JS</span>
+          </div>
+          <ul class="project-list">
+            <li>Created a Telegram bot integrating LLMs via Groq API for semantic proverb analysis and recommendation.</li>
+            <li>Developed an interactive exam prep bot (JS, algorithms, OOP) with progress tracking and quizzes.</li>
+            <li>Built a <strong>Telegram Web App (TWA)</strong> prototype and personal portfolio site on Astro.</li>
+          </ul>
+        </article>
 
       </div>
     </section>
 
     <!-- Education -->
-    <section class="mb-12 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">Education</h2>
-      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-        <div class="font-bold text-base text-[var(--text-primary)]">
-          Moscow College of Architecture and Urban Development (MKAG)
+    <section class="resume-section">
+      <div class="resume-badge">Education</div>
+      <div class="resume-card edu-card">
+        <div class="edu-header">
+          <div>
+            <h3 class="edu-title">Moscow College of Architecture and Urban Development (MKAG)</h3>
+            <p class="edu-spec">Major: 09.02.07 Information Systems and Programming</p>
+          </div>
+          <div class="edu-year">Moscow, Russia</div>
         </div>
-        <div class="text-xs text-[var(--text-tertiary)]">Moscow, Russia</div>
-      </div>
-      <div class="text-sm font-medium text-[var(--accent-light)] mb-1">
-        Major: 09.02.07 Information Systems and Programming
-      </div>
-      <div class="text-xs text-[var(--text-secondary)]">
-        Qualification: Software Engineer / Information Systems Specialist
+        <p class="edu-desc">
+          Qualification: Software Engineer / Information Systems Specialist. Focus on algorithms, object-oriented programming, relational databases, application modules, and 1C:Enterprise 8.
+        </p>
       </div>
     </section>
 
     <!-- Download CTA -->
-    <div class="text-center py-8 border-t border-[var(--border)]">
-      <a
-        href={withBase("/Daniil_Starikov_Resume.pdf")}
-        download="Daniil_Starikov_Resume.pdf"
-        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-base font-semibold transition-all shadow-md hover:shadow-lg"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="resume-cta-bottom">
+      <a href={withBase("/Daniil_Starikov_Resume.pdf")} download="Daniil_Starikov_Resume.pdf" class="cta-download-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="cta-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         Download Resume in PDF
       </a>
     </div>
+  </main>
 
-  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-copy">© 2026 {profile.fullName} · Resume</p>
+    </div>
+  </footer>
+
+  <script is:inline>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle?.querySelector('.theme-icon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    if (themeIcon) themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+
+    themeToggle?.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      if (themeIcon) themeIcon.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+  </script>
 </BaseLayout>
+
+<style>
+  .resume-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4rem 1.5rem;
+  }
+
+  .nav-btn-primary {
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+  }
+
+  .nav-btn-primary:hover {
+    background: var(--accent-light) !important;
+    border-color: var(--accent-light) !important;
+  }
+
+  .resume-hero {
+    margin-bottom: 3.5rem;
+  }
+
+  .resume-badge {
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background: var(--accent-glow);
+    color: var(--accent-light);
+    border: 1px solid var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  .resume-name {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .resume-role {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .resume-location {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1.5rem;
+  }
+
+  .resume-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+
+  .contact-pill:hover {
+    border-color: var(--accent-light);
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+  }
+
+  .resume-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-badge::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .resume-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.25s ease;
+  }
+
+  .resume-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .resume-about-card {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .resume-about-card strong {
+    color: var(--text-primary);
+  }
+
+  .skills-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .skill-box:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .skill-box-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-box-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-entry {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .project-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .project-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: var(--accent-glow);
+    color: var(--accent-light);
+    border: 1px solid var(--accent);
+  }
+
+  .project-sublinks {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .project-sublinks a {
+    color: var(--accent-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .project-sublinks a:hover {
+    color: var(--text-primary);
+  }
+
+  .dot-sep {
+    color: var(--border);
+  }
+
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .project-list li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .project-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-light);
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .project-list strong {
+    color: var(--text-primary);
+  }
+
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .edu-spec {
+    font-size: 0.95rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+
+  .edu-year {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .edu-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .resume-cta-bottom {
+    text-align: center;
+    padding: 3rem 0 1rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .cta-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px var(--accent-glow);
+    transition: all 0.25s ease;
+  }
+
+  .cta-download-btn:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+
+  .cta-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @media (max-width: 640px) {
+    .resume-wrapper {
+      padding-top: 5.5rem;
+    }
+    .resume-card {
+      padding: 1.25rem;
+    }
+  }
+</style>

@@ -3,210 +3,549 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { profile } from "../../content/profile";
 
 const base = import.meta.env.BASE_URL;
-const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
-const withBase = (p: string) => `${baseNoTrail}${p}`;
+const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
+const withBase = (p: string) => `${baseNoSlash}${p}`;
 ---
 
 <BaseLayout lang="ru" title="Резюме — Даниил Стариков" description="Резюме разработчика прикладного ПО и системной автоматизации. Стек: Python, C#, PyQt6, AI APIs, Linux.">
-  <div class="min-h-screen py-10 px-4 max-w-4xl mx-auto">
-    <!-- Навигация назад и кнопка скачивания -->
-    <div class="flex items-center justify-between mb-8 pb-4 border-b border-[var(--border)]">
-      <a class="text-sm font-medium text-[var(--accent-light)] hover:underline flex items-center gap-1" href={withBase("/ru/")}>
-        ← Назад на главную
+  <!-- Навигация -->
+  <nav class="nav">
+    <a href={`${baseNoSlash}/ru/`} class="nav-logo">straiko</a>
+    <div class="nav-controls">
+      <a href={withBase("/Daniil_Starikov_Resume.pdf")} download="Резюме_Стариков_Даниил.pdf" class="nav-btn nav-btn-primary">
+        ↓ Скачать PDF
       </a>
-      <a
-        href={withBase("/Daniil_Starikov_Resume.pdf")}
-        download="Резюме_Стариков_Даниил.pdf"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-sm font-semibold transition-colors shadow-sm"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        Скачать резюме (PDF)
-      </a>
+      <a href={`${baseNoSlash}/resume/`} class="nav-btn">EN</a>
+      <a href={`${baseNoSlash}/ru/`} class="nav-btn">На главную</a>
+      <button id="themeToggle" class="nav-btn" aria-label="Переключить тему">
+        <span class="theme-icon">🌙</span>
+      </button>
     </div>
+  </nav>
 
-    <!-- Заголовок резюме -->
-    <header class="mb-10">
-      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent-glow)] text-[var(--accent-light)] border border-[var(--accent)] mb-3">
-        Open for opportunities
-      </div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight mb-2">
-        Стариков Даниил Александрович
-      </h1>
-      <p class="text-lg font-medium text-[var(--accent-light)] mb-3">
-        Python Developer / Software Engineer (Desktop, Automation & AI Solutions)
-      </p>
-      <p class="text-sm text-[var(--text-secondary)] mb-4">
-        📍 г. Москва · Готов к удаленной работе / гибриду
-      </p>
+  <main class="resume-wrapper">
+    <!-- Header -->
+    <header class="resume-hero">
+      <div class="resume-badge">Open for opportunities</div>
+      <h1 class="resume-name">Стариков Даниил Александрович</h1>
+      <p class="resume-role">Python Developer / Software Engineer (Desktop, Automation & AI Solutions)</p>
+      <p class="resume-location">📍 г. Москва · Готов к удаленной работе / гибриду</p>
 
-      <div class="flex flex-wrap gap-4 text-sm text-[var(--text-secondary)] pt-2 border-t border-[var(--border)]">
-        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          Telegram: @Gram_vvallet
+      <div class="resume-contacts">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="contact-pill">
+          <span class="contact-icon">✈️</span> Telegram: @Gram_vvallet
         </a>
-        <a href="mailto:Daniilstarikov2017@gmail.com" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          Daniilstarikov2017@gmail.com
+        <a href="mailto:Daniilstarikov2017@gmail.com" class="contact-pill">
+          <span class="contact-icon">✉️</span> Daniilstarikov2017@gmail.com
         </a>
-        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          GitHub: @Straiko
+        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="contact-pill">
+          <span class="contact-icon">🐙</span> GitHub: @Straiko
         </a>
-        <a href="https://straiko.github.io/straiko-me/" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
-          Портфолио: straiko.me
+        <a href="https://straiko.github.io/straiko-me/" target="_blank" rel="noreferrer" class="contact-pill">
+          <span class="contact-icon">🌐</span> straiko.github.io/straiko-me
         </a>
       </div>
     </header>
 
     <!-- О себе -->
-    <section class="mb-10 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">О себе</h2>
-      <p class="text-[var(--text-secondary)] leading-relaxed text-sm sm:text-base">
-        Разработчик прикладного ПО и системной автоматизации с упором на <strong>Python</strong> и <strong>C# / .NET</strong>. Создаю надежные десктопные приложения, Telegram-боты, интеграции с LLM и сервисы распознавания данных. В работе придерживаюсь принципов чистого кода и надежности: проектирую модульную архитектуру, покрываю код автоматическими тестами (<strong>105+ тестов на pytest</strong>), использую строгую типизацию (<strong>mypy</strong>) и линтинг (<strong>ruff</strong>), выстраиваю автоматические процессы сборки и доставки (<strong>CI/CD GitHub Actions</strong>). Уверенно чувствую себя в среде Linux и при анализе внутренних механизмов систем через реверс-инжиниринг.
-      </p>
+    <section class="resume-section">
+      <div class="section-badge">О себе</div>
+      <div class="resume-card resume-about-card">
+        <p>
+          Разработчик прикладного ПО и системной автоматизации с упором на <strong>Python</strong> и <strong>C# / .NET</strong>. Создаю надежные десктопные приложения, Telegram-боты, интеграции с LLM и сервисы распознавания данных.
+        </p>
+        <p style="margin-top: 0.75rem;">
+          В работе придерживаюсь принципов чистого кода и надежности: проектирую модульную архитектуру, покрываю код автоматическими тестами (<strong>105+ тестов на pytest</strong>), использую строгую типизацию (<strong>mypy</strong>) и линтинг (<strong>ruff</strong>), выстраиваю автоматические процессы сборки и доставки (<strong>CI/CD GitHub Actions</strong>). Уверенно чувствую себя в среде Linux и при анализе внутренних механизмов систем через реверс-инжиниринг.
+        </p>
+      </div>
     </section>
 
-    <!-- Навыки -->
-    <section class="mb-10">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Технические навыки</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Языки программирования</div>
-          <div class="text-xs text-[var(--text-secondary)]">Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, базовый Rust</div>
+    <!-- Технические навыки -->
+    <section class="resume-section">
+      <div class="section-badge">Технические навыки</div>
+      <div class="skills-layout">
+        <div class="skill-box">
+          <div class="skill-box-title">💻 Языки программирования</div>
+          <div class="skill-box-desc">Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, базовый Rust</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Десктоп и системный уровень</div>
-          <div class="text-xs text-[var(--text-secondary)]">PyQt6, Qt Designer, Win32 API, Linux Input, глобальные хоткеи, буфер обмена, трей</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🖥️ Десктоп и системный уровень</div>
+          <div class="skill-box-desc">PyQt6, Qt Designer, Win32 API, Linux Input, глобальные хоткеи, буфер обмена, системный трей</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Аудио, Компьютерное зрение & AI</div>
-          <div class="text-xs text-[var(--text-secondary)]">Speech Recognition (STT), захват микрофона, OCR (Code128 / QR), OpenAI, Anthropic, Groq, Ollama</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🤖 Аудио, Компьютерное зрение & AI</div>
+          <div class="skill-box-desc">Speech Recognition (STT), захват микрофона, OCR (Code128 / QR), OpenAI, Anthropic, Groq, Ollama</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Тестирование и качество кода</div>
-          <div class="text-xs text-[var(--text-secondary)]">Pytest (105+ тестов), MyPy (строгая типизация), Ruff, Pre-commit, Git, Conventional Commits</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🧪 Тестирование и качество кода</div>
+          <div class="skill-box-desc">Pytest (105+ тестов), MyPy (строгая типизация), Ruff, Pre-commit, Git, Conventional Commits</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">CI/CD и дистрибуция</div>
-          <div class="text-xs text-[var(--text-secondary)]">GitHub Actions, PyInstaller (standalone сборка), Inno Setup (Windows инсталляторы)</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🚀 CI/CD и дистрибуция</div>
+          <div class="skill-box-desc">GitHub Actions, PyInstaller (standalone сборка), Inno Setup (Windows инсталляторы)</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Реверс-инжиниринг и движки</div>
-          <div class="text-xs text-[var(--text-secondary)]">.NET Reflection, анализ сборок Unity (IL/C#), XPath/XML патчинг, модификация движков</div>
+        <div class="skill-box">
+          <div class="skill-box-title">⚙️ Реверс-инжиниринг и движки</div>
+          <div class="skill-box-desc">.NET Reflection, анализ сборок Unity (IL/C#), XPath/XML патчинг, модификация движков</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Боты и веб-технологии</div>
-          <div class="text-xs text-[var(--text-secondary)]">Telegram Bot API (aiogram), Telegram Web Apps (TWA), VK API, Astro, HTML/CSS/JS, React.js</div>
+        <div class="skill-box">
+          <div class="skill-box-title">📱 Боты и веб-технологии</div>
+          <div class="skill-box-desc">Telegram Bot API (aiogram), Telegram Web Apps (TWA), VK API, Astro, HTML/CSS/JS, React.js</div>
         </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Базы данных и инфраструктура</div>
-          <div class="text-xs text-[var(--text-secondary)]">Проектирование БД, SQL, 1С:Предприятие 8, Linux (Wayland/X11), сетевые протоколы, VLAN</div>
+        <div class="skill-box">
+          <div class="skill-box-title">🗄️ Базы данных и инфраструктура</div>
+          <div class="skill-box-desc">Проектирование БД, SQL, 1С:Предприятие 8, Linux (Wayland/X11), сетевые протоколы, VLAN</div>
         </div>
       </div>
     </section>
 
-    <!-- Проекты и опыт -->
-    <section class="mb-10">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Проекты и практический опыт</h2>
-      <div class="space-y-6">
+    <!-- Проекты -->
+    <section class="resume-section">
+      <div class="section-badge">Проекты и практический опыт</div>
+      <div class="projects-stack">
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              Olympus (fast_trans) — Мультимодальный десктопный ассистент перевода и ввода
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">Python · PyQt6 · CI/CD</span>
+        <!-- Проект 1: Olympus -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">Olympus (fast_trans) — Мультимодальный десктопный ассистент перевода и ввода</h3>
+            <span class="project-pill">Python · PyQt6 · CI/CD</span>
           </div>
-          <div class="text-xs text-[var(--text-tertiary)] mb-3">
-            <a href="https://github.com/Straiko/fast_trans" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a> · 
-            <a href="https://straiko.github.io/fast_trans/" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Лендинг</a>
+          <div class="project-sublinks">
+            <a href="https://github.com/Straiko/fast_trans" target="_blank" rel="noreferrer">🐙 GitHub репозиторий ↗</a>
+            <span class="dot-sep">•</span>
+            <a href="https://straiko.github.io/fast_trans/" target="_blank" rel="noreferrer">🌐 Лендинг проекта ↗</a>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>Спроектировал модульное десктопное приложение для мгновенного инлайн-перевода выделенного текста и голосового ввода с AI-оптимизацией.</li>
             <li>Реализовал кроссплатформенный низкоуровневый перехват глобальных горячих клавиш и бесшовную замену текста в активных окнах любых программ с автоматическим восстановлением буфера обмена.</li>
-            <li>Построил аудиопайплайн: автоопределение микрофонов, захват потока, транскрибация речи (STT), AI-исправление оговорок и перевод.</li>
-            <li>Обеспечил промышленный стандарт надежности: написал <strong>105+ автоматических тестов (pytest)</strong>, настроил статический анализ типов <strong>MyPy</strong> и линтер <strong>Ruff</strong>.</li>
-            <li>Настроил <strong>CI/CD через GitHub Actions</strong> для автосборки standalone исполняемых файлов под Windows/Linux и установщика Inno Setup.</li>
+            <li>Построил аудиопайплайн: автоопределение микрофонов, захват звука, транскрибация речи (STT), AI-исправление оговорок и перевод.</li>
+            <li>Обеспечил промышленный стандарт качества: написал <strong>105+ автоматических тестов (pytest)</strong>, настроил строгий анализ типов <strong>MyPy</strong> и линтер <strong>Ruff</strong>.</li>
+            <li>Настроил <strong>CI/CD через GitHub Actions</strong> для автосборки standalone исполняемых файлов под Windows/Linux и инсталлятора Inno Setup.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              SHK Bot / @Ozonbratik_bot — Сервис распознавания и генерации кодов
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">Python · OCR · Bots</span>
+        <!-- Проект 2: SHK Bot -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">SHK Bot / @Ozonbratik_bot — Сервис распознавания и генерации штрих-кодов</h3>
+            <span class="project-pill">Python · OCR · Bots</span>
           </div>
-          <div class="text-xs text-[var(--text-tertiary)] mb-3">
-            <a href="https://t.me/Ozonbratik_bot" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Telegram бот</a> · 
-            <a href="https://github.com/Straiko/shk" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a>
+          <div class="project-sublinks">
+            <a href="https://t.me/Ozonbratik_bot" target="_blank" rel="noreferrer">✈️ Запустить в Telegram ↗</a>
+            <span class="dot-sep">•</span>
+            <a href="https://github.com/Straiko/shk" target="_blank" rel="noreferrer">🐙 GitHub репозиторий ↗</a>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>Разработал и развернул бота для распознавания и генерации штрих-кодов (Code128) и QR-кодов для складской и товарной логистики.</li>
             <li>Внедрил алгоритмы предобработки изображений и OCR-fallback для надежного считывания даже поврежденных или смазанных кодов.</li>
             <li>Реализовал мультиплатформенных клиентов (Telegram, VK, MAX) и промо-сайт на Astro.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              Моддинг игровых движков и анализ сборок (CryoArsenal)
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">C# · .NET · Unity · Reflection</span>
+        <!-- Проект 3: Unity Modding -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">Моддинг игровых движков и анализ сборок (CryoArsenal)</h3>
+            <span class="project-pill">C# · .NET · Unity · Reflection</span>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>С помощью <strong>.NET Reflection</strong> исследовал закрытое API и внутренние классы сборки <code>Assembly-CSharp.dll</code> для вызова приватных методов и управления состоянием игровых сущностей.</li>
             <li>Разработал расширение с кастомными механиками крио-урона и стазиса, интегрировал кастомные интерфейсы в систему XUI и внедрил патчи данных через XPath.</li>
           </ul>
-        </div>
+        </article>
 
-        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
-              AI & Web проекты (Proverb Bot, SmartCart TWA, Exam Tickets Bot)
-            </h3>
-            <span class="text-xs font-medium text-[var(--accent-light)]">LLM · Groq · TWA · JS</span>
+        <!-- Проект 4: AI & Web -->
+        <article class="resume-card project-entry">
+          <div class="project-top">
+            <h3 class="project-name">AI & Web проекты (Proverb Bot, SmartCart TWA, Exam Tickets Bot)</h3>
+            <span class="project-pill">LLM · Groq · TWA · JS</span>
           </div>
-          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+          <ul class="project-list">
             <li>Создал Telegram-бота с интеграцией LLM через Groq API для смыслового анализа и подбора пословиц.</li>
             <li>Разработал интерактивного бота для сдачи экзаменов по билетам (JS, алгоритмы, ООП) с трекингом прогресса и викторинами.</li>
             <li>Собрал интерактивное мини-приложение <strong>Telegram Web App (TWA)</strong> и персональный сайт-портфолио на фреймворке Astro.</li>
           </ul>
-        </div>
+        </article>
 
       </div>
     </section>
 
     <!-- Образование -->
-    <section class="mb-12 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">Образование</h2>
-      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-        <div class="font-bold text-base text-[var(--text-primary)]">
-          ГБПОУ МКАГ (Московский колледж архитектуры и градостроительства)
+    <section class="resume-section">
+      <div class="section-badge">Образование</div>
+      <div class="resume-card edu-card">
+        <div class="edu-header">
+          <div>
+            <h3 class="edu-title">ГБПОУ МКАГ (Московский колледж архитектуры и градостроительства)</h3>
+            <p class="edu-spec">Специальность: 09.02.07 «Информационные системы и программирование»</p>
+          </div>
+          <div class="edu-year">Москва, Россия</div>
         </div>
-        <div class="text-xs text-[var(--text-tertiary)]">г. Москва, Россия</div>
-      </div>
-      <div class="text-sm font-medium text-[var(--accent-light)] mb-1">
-        Специальность: 09.02.07 «Информационные системы и программирование»
-      </div>
-      <div class="text-xs text-[var(--text-secondary)]">
-        Квалификация: Программист / Разработчик информационных систем (Демонстрационный экзамен КОД 09.02.07-5)
+        <p class="edu-desc">
+          Квалификация: Программист / Разработчик информационных систем (Демонстрационный экзамен КОД 09.02.07-5). Изучение алгоритмов, ООП, проектирования СУБД, прикладных модулей и 1С:Предприятие 8.
+        </p>
       </div>
     </section>
 
-    <!-- Финальная плашка с кнопкой -->
-    <div class="text-center py-8 border-t border-[var(--border)]">
-      <a
-        href={withBase("/Daniil_Starikov_Resume.pdf")}
-        download="Резюме_Стариков_Даниил.pdf"
-        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-base font-semibold transition-all shadow-md hover:shadow-lg"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Скачать PDF футер -->
+    <div class="resume-cta-bottom">
+      <a href={withBase("/Daniil_Starikov_Resume.pdf")} download="Резюме_Стариков_Даниил.pdf" class="cta-download-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="cta-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
         Скачать резюме в формате PDF
       </a>
     </div>
+  </main>
 
-  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-copy">© 2026 {profile.fullName} · Резюме</p>
+    </div>
+  </footer>
+
+  <script is:inline>
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle?.querySelector('.theme-icon');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    if (themeIcon) themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+
+    themeToggle?.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      if (themeIcon) themeIcon.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+  </script>
 </BaseLayout>
+
+<style>
+  .resume-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 4rem 1.5rem;
+  }
+
+  .nav-btn-primary {
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+  }
+
+  .nav-btn-primary:hover {
+    background: var(--accent-light) !important;
+    border-color: var(--accent-light) !important;
+  }
+
+  .resume-hero {
+    margin-bottom: 3.5rem;
+  }
+
+  .resume-badge {
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background: var(--accent-glow);
+    color: var(--accent-light);
+    border: 1px solid var(--accent);
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  .resume-name {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .resume-role {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .resume-location {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1.5rem;
+  }
+
+  .resume-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+  }
+
+  .contact-pill:hover {
+    border-color: var(--accent-light);
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+    transform: translateY(-1px);
+  }
+
+  .resume-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-badge::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .resume-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.25s ease;
+  }
+
+  .resume-card:hover {
+    border-color: var(--border-hover);
+  }
+
+  .resume-about-card {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .resume-about-card strong {
+    color: var(--text-primary);
+  }
+
+  .skills-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: all 0.2s ease;
+  }
+
+  .skill-box:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .skill-box-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-box-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-entry {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .project-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .project-pill {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: var(--accent-glow);
+    color: var(--accent-light);
+    border: 1px solid var(--accent);
+  }
+
+  .project-sublinks {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .project-sublinks a {
+    color: var(--accent-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .project-sublinks a:hover {
+    color: var(--text-primary);
+  }
+
+  .dot-sep {
+    color: var(--border);
+  }
+
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .project-list li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .project-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-light);
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+
+  .project-list strong {
+    color: var(--text-primary);
+  }
+
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .edu-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .edu-spec {
+    font-size: 0.95rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+
+  .edu-year {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
+  .edu-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .resume-cta-bottom {
+    text-align: center;
+    padding: 3rem 0 1rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .cta-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px var(--accent-glow);
+    transition: all 0.25s ease;
+  }
+
+  .cta-download-btn:hover {
+    background: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+
+  .cta-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  @media (max-width: 640px) {
+    .resume-wrapper {
+      padding-top: 5.5rem;
+    }
+    .resume-card {
+      padding: 1.25rem;
+    }
+  }
+</style>
