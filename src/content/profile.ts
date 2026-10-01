@@ -1,12 +1,12 @@
 export const profile = {
   fullName: "Daniil Starikov",
   tagline: {
-    ru: "Разработчик",
-    en: "Developer"
+    ru: "Инди-разработчик & Software Engineer",
+    en: "Indie Developer & Software Engineer"
   },
   subtitle: {
-    ru: "Студент IT-специальности",
-    en: "IT Student"
+    ru: "Создаю продукты полного цикла: от архитектуры и тестов до релиза",
+    en: "Building full-cycle software products: from architecture & tests to shipping"
   },
   location: {
     ru: "📍 Москва, Россия",
