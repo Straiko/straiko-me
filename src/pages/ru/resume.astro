@@ -1,0 +1,212 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { profile } from "../../content/profile";
+
+const base = import.meta.env.BASE_URL;
+const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
+const withBase = (p: string) => `${baseNoTrail}${p}`;
+---
+
+<BaseLayout lang="ru" title="Резюме — Даниил Стариков" description="Резюме разработчика прикладного ПО и системной автоматизации. Стек: Python, C#, PyQt6, AI APIs, Linux.">
+  <div class="min-h-screen py-10 px-4 max-w-4xl mx-auto">
+    <!-- Навигация назад и кнопка скачивания -->
+    <div class="flex items-center justify-between mb-8 pb-4 border-b border-[var(--border)]">
+      <a class="text-sm font-medium text-[var(--accent-light)] hover:underline flex items-center gap-1" href={withBase("/ru/")}>
+        ← Назад на главную
+      </a>
+      <a
+        href={withBase("/Daniil_Starikov_Resume.pdf")}
+        download="Резюме_Стариков_Даниил.pdf"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-sm font-semibold transition-colors shadow-sm"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Скачать резюме (PDF)
+      </a>
+    </div>
+
+    <!-- Заголовок резюме -->
+    <header class="mb-10">
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent-glow)] text-[var(--accent-light)] border border-[var(--accent)] mb-3">
+        Open for opportunities
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight mb-2">
+        Стариков Даниил Александрович
+      </h1>
+      <p class="text-lg font-medium text-[var(--accent-light)] mb-3">
+        Python Developer / Software Engineer (Desktop, Automation & AI Solutions)
+      </p>
+      <p class="text-sm text-[var(--text-secondary)] mb-4">
+        📍 г. Москва · Готов к удаленной работе / гибриду
+      </p>
+
+      <div class="flex flex-wrap gap-4 text-sm text-[var(--text-secondary)] pt-2 border-t border-[var(--border)]">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          Telegram: @Gram_vvallet
+        </a>
+        <a href="mailto:Daniilstarikov2017@gmail.com" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          Daniilstarikov2017@gmail.com
+        </a>
+        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          GitHub: @Straiko
+        </a>
+        <a href="https://straiko.github.io/straiko-me/" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          Портфолио: straiko.me
+        </a>
+      </div>
+    </header>
+
+    <!-- О себе -->
+    <section class="mb-10 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">О себе</h2>
+      <p class="text-[var(--text-secondary)] leading-relaxed text-sm sm:text-base">
+        Разработчик прикладного ПО и системной автоматизации с упором на <strong>Python</strong> и <strong>C# / .NET</strong>. Создаю надежные десктопные приложения, Telegram-боты, интеграции с LLM и сервисы распознавания данных. В работе придерживаюсь принципов чистого кода и надежности: проектирую модульную архитектуру, покрываю код автоматическими тестами (<strong>105+ тестов на pytest</strong>), использую строгую типизацию (<strong>mypy</strong>) и линтинг (<strong>ruff</strong>), выстраиваю автоматические процессы сборки и доставки (<strong>CI/CD GitHub Actions</strong>). Уверенно чувствую себя в среде Linux и при анализе внутренних механизмов систем через реверс-инжиниринг.
+      </p>
+    </section>
+
+    <!-- Навыки -->
+    <section class="mb-10">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Технические навыки</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Языки программирования</div>
+          <div class="text-xs text-[var(--text-secondary)]">Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, базовый Rust</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Десктоп и системный уровень</div>
+          <div class="text-xs text-[var(--text-secondary)]">PyQt6, Qt Designer, Win32 API, Linux Input, глобальные хоткеи, буфер обмена, трей</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Аудио, Компьютерное зрение & AI</div>
+          <div class="text-xs text-[var(--text-secondary)]">Speech Recognition (STT), захват микрофона, OCR (Code128 / QR), OpenAI, Anthropic, Groq, Ollama</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Тестирование и качество кода</div>
+          <div class="text-xs text-[var(--text-secondary)]">Pytest (105+ тестов), MyPy (строгая типизация), Ruff, Pre-commit, Git, Conventional Commits</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">CI/CD и дистрибуция</div>
+          <div class="text-xs text-[var(--text-secondary)]">GitHub Actions, PyInstaller (standalone сборка), Inno Setup (Windows инсталляторы)</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Реверс-инжиниринг и движки</div>
+          <div class="text-xs text-[var(--text-secondary)]">.NET Reflection, анализ сборок Unity (IL/C#), XPath/XML патчинг, модификация движков</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Боты и веб-технологии</div>
+          <div class="text-xs text-[var(--text-secondary)]">Telegram Bot API (aiogram), Telegram Web Apps (TWA), VK API, Astro, HTML/CSS/JS, React.js</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Базы данных и инфраструктура</div>
+          <div class="text-xs text-[var(--text-secondary)]">Проектирование БД, SQL, 1С:Предприятие 8, Linux (Wayland/X11), сетевые протоколы, VLAN</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Проекты и опыт -->
+    <section class="mb-10">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Проекты и практический опыт</h2>
+      <div class="space-y-6">
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              Olympus (fast_trans) — Мультимодальный десктопный ассистент перевода и ввода
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">Python · PyQt6 · CI/CD</span>
+          </div>
+          <div class="text-xs text-[var(--text-tertiary)] mb-3">
+            <a href="https://github.com/Straiko/fast_trans" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a> · 
+            <a href="https://straiko.github.io/fast_trans/" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Лендинг</a>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>Спроектировал модульное десктопное приложение для мгновенного инлайн-перевода выделенного текста и голосового ввода с AI-оптимизацией.</li>
+            <li>Реализовал кроссплатформенный низкоуровневый перехват глобальных горячих клавиш и бесшовную замену текста в активных окнах любых программ с автоматическим восстановлением буфера обмена.</li>
+            <li>Построил аудиопайплайн: автоопределение микрофонов, захват потока, транскрибация речи (STT), AI-исправление оговорок и перевод.</li>
+            <li>Обеспечил промышленный стандарт надежности: написал <strong>105+ автоматических тестов (pytest)</strong>, настроил статический анализ типов <strong>MyPy</strong> и линтер <strong>Ruff</strong>.</li>
+            <li>Настроил <strong>CI/CD через GitHub Actions</strong> для автосборки standalone исполняемых файлов под Windows/Linux и установщика Inno Setup.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              SHK Bot / @Ozonbratik_bot — Сервис распознавания и генерации кодов
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">Python · OCR · Bots</span>
+          </div>
+          <div class="text-xs text-[var(--text-tertiary)] mb-3">
+            <a href="https://t.me/Ozonbratik_bot" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Telegram бот</a> · 
+            <a href="https://github.com/Straiko/shk" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>Разработал и развернул бота для распознавания и генерации штрих-кодов (Code128) и QR-кодов для складской и товарной логистики.</li>
+            <li>Внедрил алгоритмы предобработки изображений и OCR-fallback для надежного считывания даже поврежденных или смазанных кодов.</li>
+            <li>Реализовал мультиплатформенных клиентов (Telegram, VK, MAX) и промо-сайт на Astro.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              Моддинг игровых движков и анализ сборок (CryoArsenal)
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">C# · .NET · Unity · Reflection</span>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>С помощью <strong>.NET Reflection</strong> исследовал закрытое API и внутренние классы сборки <code>Assembly-CSharp.dll</code> для вызова приватных методов и управления состоянием игровых сущностей.</li>
+            <li>Разработал расширение с кастомными механиками крио-урона и стазиса, интегрировал кастомные интерфейсы в систему XUI и внедрил патчи данных через XPath.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              AI & Web проекты (Proverb Bot, SmartCart TWA, Exam Tickets Bot)
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">LLM · Groq · TWA · JS</span>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>Создал Telegram-бота с интеграцией LLM через Groq API для смыслового анализа и подбора пословиц.</li>
+            <li>Разработал интерактивного бота для сдачи экзаменов по билетам (JS, алгоритмы, ООП) с трекингом прогресса и викторинами.</li>
+            <li>Собрал интерактивное мини-приложение <strong>Telegram Web App (TWA)</strong> и персональный сайт-портфолио на фреймворке Astro.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Образование -->
+    <section class="mb-12 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">Образование</h2>
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+        <div class="font-bold text-base text-[var(--text-primary)]">
+          ГБПОУ МКАГ (Московский колледж архитектуры и градостроительства)
+        </div>
+        <div class="text-xs text-[var(--text-tertiary)]">г. Москва, Россия</div>
+      </div>
+      <div class="text-sm font-medium text-[var(--accent-light)] mb-1">
+        Специальность: 09.02.07 «Информационные системы и программирование»
+      </div>
+      <div class="text-xs text-[var(--text-secondary)]">
+        Квалификация: Программист / Разработчик информационных систем (Демонстрационный экзамен КОД 09.02.07-5)
+      </div>
+    </section>
+
+    <!-- Финальная плашка с кнопкой -->
+    <div class="text-center py-8 border-t border-[var(--border)]">
+      <a
+        href={withBase("/Daniil_Starikov_Resume.pdf")}
+        download="Резюме_Стариков_Даниил.pdf"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-base font-semibold transition-all shadow-md hover:shadow-lg"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Скачать резюме в формате PDF
+      </a>
+    </div>
+
+  </div>
+</BaseLayout>

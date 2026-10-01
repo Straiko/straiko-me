@@ -59,6 +59,7 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
   <nav class="nav">
     <a href={`${baseNoSlash}/ru/`} class="nav-logo">straiko</a>
     <div class="nav-controls">
+      <a href={`${baseNoSlash}/ru/resume/`} class="nav-btn">Резюме</a>
       <a href={`${baseNoSlash}/`} class="nav-btn">EN</a>
       <button id="themeToggle" class="nav-btn" aria-label="Переключить тему">
         <span class="theme-icon">🌙</span>
@@ -70,9 +71,15 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
   <section class="hero">
     <div class="hero-badge">Открыт для предложений</div>
     <h1 class="hero-title">Даниил Стариков</h1>
-    <p class="hero-subtitle">Студент IT-специальности и разработчик, создающий быстрые, современные и визуально совершенные приложения. Сейчас сосредоточен на full-stack разработке и проектировании систем.</p>
+    <p class="hero-subtitle">Студент IT-специальности и разработчик, создающий быстрые, современные и надежные приложения. Специализируюсь на Python, десктопе, автоматизации, системной интеграции и C#.</p>
     <div class="hero-links">
-      <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hero-link">
+      <a href={`${baseNoSlash}/ru/resume/`} class="hero-link">
+        📄 Резюме / CV
+      </a>
+      <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="hero-link hero-link-secondary">
+        Telegram ↗
+      </a>
+      <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hero-link hero-link-secondary">
         GitHub ↗
       </a>
       <a href="mailto:Daniilstarikov2017@gmail.com" class="hero-link hero-link-secondary">

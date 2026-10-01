@@ -1,0 +1,198 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { profile } from "../content/profile";
+
+const base = import.meta.env.BASE_URL;
+const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
+const withBase = (p: string) => `${baseNoTrail}${p}`;
+---
+
+<BaseLayout lang="en" title="Resume — Daniil Starikov" description="Resume of Software Engineer specializing in Python, C#, PyQt6, AI APIs, Linux.">
+  <div class="min-h-screen py-10 px-4 max-w-4xl mx-auto">
+    <!-- Navigation back & download -->
+    <div class="flex items-center justify-between mb-8 pb-4 border-b border-[var(--border)]">
+      <a class="text-sm font-medium text-[var(--accent-light)] hover:underline flex items-center gap-1" href={withBase("/")}>
+        ← Back to home
+      </a>
+      <a
+        href={withBase("/Daniil_Starikov_Resume.pdf")}
+        download="Daniil_Starikov_Resume.pdf"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-sm font-semibold transition-colors shadow-sm"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Download Resume (PDF)
+      </a>
+    </div>
+
+    <!-- Header -->
+    <header class="mb-10">
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[var(--accent-glow)] text-[var(--accent-light)] border border-[var(--accent)] mb-3">
+        Open for opportunities
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-primary)] tracking-tight mb-2">
+        Daniil Starikov
+      </h1>
+      <p class="text-lg font-medium text-[var(--accent-light)] mb-3">
+        Python Developer / Software Engineer (Desktop, Automation & AI Solutions)
+      </p>
+      <p class="text-sm text-[var(--text-secondary)] mb-4">
+        📍 Moscow, Russia · Open to remote work / hybrid
+      </p>
+
+      <div class="flex flex-wrap gap-4 text-sm text-[var(--text-secondary)] pt-2 border-t border-[var(--border)]">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          Telegram: @Gram_vvallet
+        </a>
+        <a href="mailto:Daniilstarikov2017@gmail.com" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          Daniilstarikov2017@gmail.com
+        </a>
+        <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          GitHub: @Straiko
+        </a>
+        <a href="https://straiko.github.io/straiko-me/" target="_blank" rel="noreferrer" class="hover:text-[var(--text-primary)] flex items-center gap-1 underline">
+          Portfolio: straiko.me
+        </a>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="mb-10 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">About Me</h2>
+      <p class="text-[var(--text-secondary)] leading-relaxed text-sm sm:text-base">
+        Software and automation developer specializing in <strong>Python</strong> and <strong>C# / .NET</strong>. Experienced in building robust desktop applications, Telegram bots, LLM integrations, and OCR services. Dedicated to engineering excellence: modular software architecture, comprehensive automated test suites (<strong>105+ pytest tests</strong>), strict typing (<strong>mypy</strong>), automated linting (<strong>ruff</strong>), and CI/CD pipelines (<strong>GitHub Actions</strong>). Proficient in Linux system tooling and runtime reverse-engineering.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-10">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Technical Skills</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Languages</div>
+          <div class="text-xs text-[var(--text-secondary)]">Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, basic Rust</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Desktop & System</div>
+          <div class="text-xs text-[var(--text-secondary)]">PyQt6, Qt Designer, Win32 API, Linux Input, Global Hotkeys, Clipboard, System Tray</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Audio, Vision & AI</div>
+          <div class="text-xs text-[var(--text-secondary)]">Speech Recognition (STT), Audio Capture, OCR (Code128 / QR), OpenAI, Anthropic, Groq, Ollama</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Quality & Testing</div>
+          <div class="text-xs text-[var(--text-secondary)]">Pytest (105+ tests), MyPy (strict types), Ruff, Pre-commit, Git, Conventional Commits</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">CI/CD & Packaging</div>
+          <div class="text-xs text-[var(--text-secondary)]">GitHub Actions, PyInstaller (standalone builds), Inno Setup (Windows installers)</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Reverse Engineering & Engines</div>
+          <div class="text-xs text-[var(--text-secondary)]">.NET Reflection, Unity assembly analysis (IL/C#), XPath/XML patching, engine modding</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Bots & Web</div>
+          <div class="text-xs text-[var(--text-secondary)]">Telegram Bot API (aiogram), Telegram Web Apps (TWA), VK API, Astro, HTML/CSS/JS, React.js</div>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="font-semibold text-sm text-[var(--text-primary)] mb-1">Databases & Infrastructure</div>
+          <div class="text-xs text-[var(--text-secondary)]">Database Design, SQL, 1C:Enterprise 8, Linux (Wayland/X11), Networking, VLANs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="mb-10">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-4">Key Projects</h2>
+      <div class="space-y-6">
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              Olympus (fast_trans) — Multimodal Desktop Translation & Voice Assistant
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">Python · PyQt6 · CI/CD</span>
+          </div>
+          <div class="text-xs text-[var(--text-tertiary)] mb-3">
+            <a href="https://github.com/Straiko/fast_trans" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a> · 
+            <a href="https://straiko.github.io/fast_trans/" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Landing Page</a>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>Designed a modular desktop application for instant text translation and voice input with AI text optimization.</li>
+            <li>Implemented low-level global hotkey listeners and text substitution in active third-party windows with clipboard preservation.</li>
+            <li>Built an audio pipeline: dynamic microphone selection, stream capture, speech-to-text (STT), AI error correction, and instant translation.</li>
+            <li>Engineered for production reliability: <strong>105+ automated tests (pytest)</strong>, static type checking (<strong>MyPy</strong>), and <strong>Ruff</strong> linting.</li>
+            <li>Configured <strong>GitHub Actions CI/CD</strong> for automated test execution and standalone executable / Inno Setup builds.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              SHK Bot / @Ozonbratik_bot — Barcode & QR Code OCR Generator Service
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">Python · OCR · Bots</span>
+          </div>
+          <div class="text-xs text-[var(--text-tertiary)] mb-3">
+            <a href="https://t.me/Ozonbratik_bot" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">Telegram Bot</a> · 
+            <a href="https://github.com/Straiko/shk" target="_blank" rel="noreferrer" class="underline text-[var(--accent-light)]">GitHub</a>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>Developed and deployed a service for scanning and generating barcodes (Code128) and QR codes.</li>
+            <li>Engineered image preprocessing and OCR fallbacks for resilient reading of damaged or noisy codes.</li>
+            <li>Shipped cross-platform bots (Telegram, VK, MAX) and a promotional landing page built with Astro.</li>
+          </ul>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+            <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">
+              Game Engine Modding & Assembly Analysis (CryoArsenal)
+            </h3>
+            <span class="text-xs font-medium text-[var(--accent-light)]">C# · .NET · Unity · Reflection</span>
+          </div>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-[var(--text-secondary)]">
+            <li>Utilized <strong>.NET Reflection</strong> to inspect compiled assemblies (<code>Assembly-CSharp.dll</code>), invoking internal members and controlling game entities.</li>
+            <li>Built game extensions with custom cryo status mechanics, XUI custom components, and XPath patch configurations.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mb-12 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
+      <h2 class="text-xs font-bold uppercase tracking-wider text-[var(--accent-light)] mb-3">Education</h2>
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+        <div class="font-bold text-base text-[var(--text-primary)]">
+          Moscow College of Architecture and Urban Development (MKAG)
+        </div>
+        <div class="text-xs text-[var(--text-tertiary)]">Moscow, Russia</div>
+      </div>
+      <div class="text-sm font-medium text-[var(--accent-light)] mb-1">
+        Major: 09.02.07 Information Systems and Programming
+      </div>
+      <div class="text-xs text-[var(--text-secondary)]">
+        Qualification: Software Engineer / Information Systems Specialist
+      </div>
+    </section>
+
+    <!-- Download CTA -->
+    <div class="text-center py-8 border-t border-[var(--border)]">
+      <a
+        href={withBase("/Daniil_Starikov_Resume.pdf")}
+        download="Daniil_Starikov_Resume.pdf"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-light)] text-white text-base font-semibold transition-all shadow-md hover:shadow-lg"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Download Resume in PDF
+      </a>
+    </div>
+
+  </div>
+</BaseLayout>

@@ -14,8 +14,10 @@ export const profile = {
   },
   avatar: "/avatar.jpg",
   links: [
+    { label: "Telegram", href: "https://t.me/Gram_vvallet" },
     { label: "GitHub", href: "https://github.com/Straiko" },
     { label: "Email", href: "mailto:Daniilstarikov2017@gmail.com" },
+    { label: "Resume (PDF)", href: "/Daniil_Starikov_Resume.pdf" },
     { label: "Projects", href: "https://github.com/Straiko?tab=repositories" }
   ],
   about: [
@@ -24,10 +26,10 @@ export const profile = {
       titleEn: "Education",
       items: [
         {
-          name: "МКАГ",
+          name: "ГБПОУ МКАГ",
           role: {
-            ru: "Студент IT-специальности",
-            en: "IT Student"
+            ru: "09.02.07 «Информационные системы и программирование» (Программист)",
+            en: "09.02.07 Information Systems & Programming (Software Developer)"
           },
           logo: "🎓"
         }
@@ -40,50 +42,50 @@ export const profile = {
         {
           name: "Языки программирования",
           role: {
-            ru: "Python, JavaScript, C++, C, PHP, Node.js",
-            en: "Python, JavaScript, C++, C, PHP, Node.js"
+            ru: "Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, базовый Rust",
+            en: "Python 3.10+, C# (.NET), SQL, JavaScript / TypeScript, Bash, PHP, basic Rust"
           },
           logo: "💻"
         },
         {
-          name: "Веб-технологии",
+          name: "Десктоп & Системная разработка",
           role: {
-            ru: "HTML, CSS, SQL, React.js, PHP (backend)",
-            en: "HTML, CSS, SQL, React.js, PHP (backend)"
+            ru: "PyQt6, низкоуровневые хуки ОС, захват звука / STT, Win32 / Linux input",
+            en: "PyQt6, OS low-level hooks, audio capture / STT, Win32 / Linux input"
           },
-          logo: "🌐"
+          logo: "🖥️"
         },
         {
-          name: "Базы данных",
+          name: "Качество кода & DevOps",
           role: {
-            ru: "SQL, моделирование данных, проектирование БД",
-            en: "SQL, data modeling, database design"
+            ru: "Pytest (105+ тестов), MyPy, Ruff, GitHub Actions CI/CD, PyInstaller, Inno Setup",
+            en: "Pytest (105+ tests), MyPy, Ruff, GitHub Actions CI/CD, PyInstaller, Inno Setup"
+          },
+          logo: "🧪"
+        },
+        {
+          name: "Реверс-инжиниринг & Движки",
+          role: {
+            ru: ".NET Reflection, анализ сборок Unity (IL/C#), XUI, XPath/XML моддинг",
+            en: ".NET Reflection, Unity assembly analysis (IL/C#), XUI, XPath/XML modding"
+          },
+          logo: "⚙️"
+        },
+        {
+          name: "AI & Чат-боты",
+          role: {
+            ru: "OpenAI, Anthropic, Groq, Ollama, Telegram Bot API, Telegram Web Apps (TWA)",
+            en: "OpenAI, Anthropic, Groq, Ollama, Telegram Bot API, Telegram Web Apps (TWA)"
+          },
+          logo: "🤖"
+        },
+        {
+          name: "Базы данных & Архитектура",
+          role: {
+            ru: "SQL, проектирование реляционных БД, 1С:Предприятие 8, UML-диаграммы",
+            en: "SQL, relational database design, 1C:Enterprise 8, UML diagrams"
           },
           logo: "🗄️"
-        },
-        {
-          name: "Сети и инфраструктура",
-          role: {
-            ru: "Компьютерные сети, VLAN, сетевое оборудование, монтаж кабельных сред, файловые системы (FAT, NTFS), операционные системы",
-            en: "Computer networks, VLAN, network equipment, cable installation, file systems (FAT, NTFS), operating systems"
-          },
-          logo: "🌐"
-        },
-        {
-          name: "Архитектура и проектирование",
-          role: {
-            ru: "UML, диаграммы прецедентов, проектирование информационных систем",
-            en: "UML, use case diagrams, information systems design"
-          },
-          logo: "🏗️"
-        },
-        {
-          name: "Инструменты",
-          role: {
-            ru: "Git, администрирование ИС",
-            en: "Git, information systems administration"
-          },
-          logo: "🔧"
         }
       ]
     }
