@@ -189,26 +189,86 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
     </section>
   )}
 
-  <!-- Terminal -->
-  <section class="terminal-section">
-    <div class="terminal-header">
-      <h2 class="terminal-title">Interactive CLI</h2>
-      <p class="terminal-subtitle">Type <strong>help</strong> to see available commands</p>
+  <!-- For Employers -->
+  <section class="hiring-section">
+    <div class="hiring-header">
+      <div class="hiring-pill">Available for hire</div>
+      <h2 class="hiring-title">What I Bring to Your Team</h2>
+      <p class="hiring-subtitle">Why engineering teams hire me: code reliability, autonomy, and shipping production-grade solutions</p>
     </div>
-    <div class="terminal-window">
-      <div class="terminal-topbar">
-        <span class="terminal-dot red"></span>
-        <span class="terminal-dot yellow"></span>
-        <span class="terminal-dot green"></span>
+
+    <!-- Quality Metrics -->
+    <div class="hiring-metrics">
+      <div class="metric-card">
+        <div class="metric-num">105+</div>
+        <div class="metric-label">Automated Tests</div>
+        <div class="metric-sub">100% pass rate with pytest</div>
       </div>
-      <div id="terminal-body" class="terminal-body">
-        <div class="terminal-line terminal-output-accent">Welcome to Daniil Starikov's Portfolio CLI (v2.1.0)</div>
-        <div class="terminal-line">Type <span class="terminal-output-success">help</span> to view all available commands.</div>
-        <div id="terminal-output-container"></div>
-        <div class="terminal-input-line">
-          <span class="terminal-prompt">straiko@portfolio:~$</span>
-          <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal input" />
-        </div>
+      <div class="metric-card">
+        <div class="metric-num">Type-Safe</div>
+        <div class="metric-label">Strict Static Typing</div>
+        <div class="metric-sub">MyPy & Ruff CI linting</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">CI/CD</div>
+        <div class="metric-label">Automated Releases</div>
+        <div class="metric-sub">Standalone binaries & installers</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">Full-Cycle</div>
+        <div class="metric-label">Idea to Delivery</div>
+        <div class="metric-sub">Architecture, GUI, DB, APIs & packaging</div>
+      </div>
+    </div>
+
+    <!-- Value Cards -->
+    <div class="hiring-grid">
+      <div class="hiring-card">
+        <div class="hiring-icon">🎯</div>
+        <h3 class="hiring-card-title">Engineering Discipline</h3>
+        <p class="hiring-card-desc">
+          I don't write fragile scripts. I design clean modular architectures, separate concerns, maintain thorough documentation, and always back features with automated tests.
+        </p>
+      </div>
+
+      <div class="hiring-card">
+        <div class="hiring-icon">⚡</div>
+        <h3 class="hiring-card-title">Real Business Utility</h3>
+        <p class="hiring-card-desc">
+          Practical experience building end-to-end services: OCR barcode scanners for warehouse logistics, Telegram bots with LLM integration, audio pipelines, and desktop apps.
+        </p>
+      </div>
+
+      <div class="hiring-card">
+        <div class="hiring-icon">🔬</div>
+        <h3 class="hiring-card-title">Low-Level System Knowledge</h3>
+        <p class="hiring-card-desc">
+          Deep understanding of OS mechanisms and runtimes: global keyboard hooks, audio capture, clipboard recovery, and decompiling .NET assemblies via Reflection.
+        </p>
+      </div>
+
+      <div class="hiring-card">
+        <div class="hiring-icon">🤝</div>
+        <h3 class="hiring-card-title">Fast Onboarding & Autonomy</h3>
+        <p class="hiring-card-desc">
+          Comfortable exploring unfamiliar APIs and large codebases independently. Quick to adapt to team workflows and ready to complete a test assignment.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="hiring-cta">
+      <div class="hiring-cta-content">
+        <h3 class="hiring-cta-title">Looking for a strong developer?</h3>
+        <p class="hiring-cta-desc">Open for Full-time opportunities (Remote or Hybrid in Moscow).</p>
+      </div>
+      <div class="hiring-cta-buttons">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="cta-btn cta-btn-tg">
+          Message on Telegram ↗
+        </a>
+        <a href={`${baseNoSlash}/resume/`} class="cta-btn cta-btn-resume">
+          View Resume
+        </a>
       </div>
     </div>
   </section>
@@ -217,9 +277,10 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="footer-link">Telegram</a>
         <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="footer-link">GitHub</a>
         <a href="mailto:Daniilstarikov2017@gmail.com" class="footer-link">Email</a>
-        <a href="https://github.com/Straiko?tab=repositories" target="_blank" rel="noreferrer" class="footer-link">Projects</a>
+        <a href={`${baseNoSlash}/resume/`} class="footer-link">Resume</a>
       </div>
       <p class="footer-copy">© 2026 {profile.fullName}. All rights reserved.</p>
     </div>
@@ -250,79 +311,6 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       if (themeIcon) themeIcon.textContent = next === 'light' ? '🌙' : '☀️';
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const termInput = document.getElementById('terminal-input');
-      const termOutput = document.getElementById('terminal-output-container');
-      const termBody = document.getElementById('terminal-body');
-
-      function writeLine(text, className = '') {
-        const line = document.createElement('div');
-        line.className = 'terminal-line ' + className;
-        line.textContent = text;
-        termOutput.appendChild(line);
-        termBody.scrollTop = termBody.scrollHeight;
-      }
-
-      termInput?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const cmd = termInput.value.trim().toLowerCase();
-          termInput.value = '';
-          if (!cmd) return;
-
-          writeLine(`straiko@portfolio:~$ ${cmd}`, 'terminal-input-line');
-
-          switch (cmd) {
-            case 'help':
-              writeLine('Available commands:', 'terminal-output-accent');
-              writeLine('  about    - Information about Daniil Starikov');
-              writeLine('  skills   - List of primary IT competencies');
-              writeLine('  projects - View developed applications');
-              writeLine('  blog     - List of recent engineering notes');
-              writeLine('  contact  - Display communication handles');
-              writeLine('  clear    - Clear terminal logs');
-              break;
-            case 'about':
-              writeLine('Name: Daniil Starikov');
-              writeLine('Status: IT Student at МКАГ (Moscow, Russia)');
-              writeLine('Goal: Building fast, modern, and highly visual applications.');
-              break;
-            case 'skills':
-              writeLine('IT Competencies:', 'terminal-output-accent');
-              writeLine('  - Languages: Python, JavaScript, C++, C, PHP, Node.js');
-              writeLine('  - Web Tech: HTML, CSS, SQL, React.js, PHP Backend');
-              writeLine('  - Databases: SQL, Data Modeling, Database Design');
-              writeLine('  - Network: Computer Networks, VLAN, Linux');
-              break;
-            case 'projects':
-              writeLine('Developed projects:', 'terminal-output-accent');
-              writeLine('  [1] Olympus (fast_trans) - Desktop translator with AI');
-              writeLine('  [2] SHK Bot             - Telegram barcode/QR scanner');
-              writeLine('  [3] easy-php             - PHP utility collection');
-              writeLine('  [4] 2-work-52            - JavaScript practice tasks');
-              break;
-            case 'blog':
-              writeLine('Recent blog entries:', 'terminal-output-accent');
-              writeLine('  - Starting with Astro');
-              writeLine('  - Notes on learning');
-              writeLine('  - How I choose projects');
-              break;
-            case 'contact':
-              writeLine('Contact Channels:', 'terminal-output-accent');
-              writeLine('  Email: Daniilstarikov2017@gmail.com');
-              writeLine('  GitHub: https://github.com/Straiko');
-              break;
-            case 'clear':
-              termOutput.innerHTML = '';
-              break;
-            default:
-              writeLine(`Command not found: "${cmd}". Type "help" for a list of commands.`, 'terminal-output-error');
-          }
-        }
-      });
-
-      document.querySelector('.terminal-window')?.addEventListener('click', () => termInput?.focus());
     });
   </script>
 </BaseLayout>

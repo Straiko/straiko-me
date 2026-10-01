@@ -672,104 +672,194 @@ a {
   color: var(--text-tertiary);
 }
 
-/* Terminal Section */
-.terminal-section {
+/* Hiring / Value Section */
+.hiring-section {
   padding: 6rem 2rem;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.terminal-header {
+.hiring-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
 }
 
-.terminal-title {
+.hiring-pill {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  background: var(--accent-glow);
+  color: var(--accent-light);
+  border: 1px solid var(--accent);
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hiring-title {
   font-size: 2.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 1rem;
 }
 
-.terminal-subtitle {
+.hiring-subtitle {
   font-size: 1.1rem;
   color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.terminal-window {
-  background: #0a0a0a;
+/* Metrics Grid */
+.hiring-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.metric-card {
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  overflow: hidden;
-  font-family: var(--font-mono);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
-[data-theme="light"] .terminal-window {
-  background: #f8fafc;
+.metric-card:hover {
+  border-color: var(--accent-light);
+  transform: translateY(-3px);
+  background: var(--bg-card-hover);
 }
 
-.terminal-topbar {
-  background: #111111;
-  border-bottom: 1px solid var(--border);
-  padding: 0.75rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.metric-num {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--accent-light);
+  margin-bottom: 0.35rem;
 }
 
-[data-theme="light"] .terminal-topbar {
-  background: #f1f5f9;
+.metric-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
 }
 
-.terminal-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.metric-sub {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
 }
 
-.terminal-dot.red { background: #ef4444; }
-.terminal-dot.yellow { background: #f59e0b; }
-.terminal-dot.green { background: #10b981; }
+/* Hiring Cards Grid */
+.hiring-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
 
-.terminal-body {
-  padding: 1.5rem;
-  min-height: 200px;
-  max-height: 400px;
-  overflow-y: auto;
+.hiring-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.hiring-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  background: var(--bg-card-hover);
+}
+
+.hiring-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hiring-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.hiring-card-desc {
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  font-size: 0.875rem;
   line-height: 1.7;
 }
 
-.terminal-line {
+/* CTA Card */
+.hiring-cta {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(129, 140, 248, 0.05) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 24px;
+  padding: 2.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hiring-cta-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
-.terminal-input-line {
+.hiring-cta-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.hiring-cta-buttons {
   display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-btn {
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--accent-light);
+  justify-content: center;
 }
 
-.terminal-prompt {
-  color: var(--accent-light);
-  font-weight: 600;
+.cta-btn-tg {
+  background: var(--accent);
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px var(--accent-glow);
 }
 
-.terminal-input {
-  background: transparent;
-  border: none;
+.cta-btn-tg:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px var(--accent-glow);
+}
+
+.cta-btn-resume {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   color: var(--text-primary);
-  font-family: inherit;
-  font-size: inherit;
-  flex: 1;
-  outline: none;
 }
 
-.terminal-output-accent { color: var(--accent-light); }
-.terminal-output-success { color: #10b981; }
-.terminal-output-error { color: #ef4444; }
+.cta-btn-resume:hover {
+  border-color: var(--accent-light);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -804,7 +894,7 @@ a {
   .projects,
   .skills,
   .blog,
-  .terminal-section {
+  .hiring-section {
     padding: 4rem 1rem;
   }
 
@@ -812,7 +902,26 @@ a {
   .projects-title,
   .skills-title,
   .blog-title,
-  .terminal-title {
+  .hiring-title {
     font-size: 2rem;
+  }
+
+  .hiring-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hiring-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hiring-cta {
+    padding: 1.75rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hiring-cta-buttons {
+    width: 100%;
+    justify-content: center;
   }
 }

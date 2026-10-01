@@ -189,26 +189,86 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
     </section>
   )}
 
-  <!-- Терминал -->
-  <section class="terminal-section">
-    <div class="terminal-header">
-      <h2 class="terminal-title">Интерактивный CLI</h2>
-      <p class="terminal-subtitle">Введите <strong>help</strong> для просмотра доступных команд</p>
+  <!-- Для работодателей -->
+  <section class="hiring-section">
+    <div class="hiring-header">
+      <div class="hiring-pill">Готов к работе</div>
+      <h2 class="hiring-title">Что я привношу в команду</h2>
+      <p class="hiring-subtitle">Почему работодатели выбирают мои решения: инженерная надежность, автономия и ориентация на результат</p>
     </div>
-    <div class="terminal-window">
-      <div class="terminal-topbar">
-        <span class="terminal-dot red"></span>
-        <span class="terminal-dot yellow"></span>
-        <span class="terminal-dot green"></span>
+
+    <!-- Метрики качества -->
+    <div class="hiring-metrics">
+      <div class="metric-card">
+        <div class="metric-num">105+</div>
+        <div class="metric-label">Автотестов (pytest)</div>
+        <div class="metric-sub">100% pass rate в десктоп-проекте</div>
       </div>
-      <div id="terminal-body" class="terminal-body">
-        <div class="terminal-line terminal-output-accent">Добро пожаловать в CLI Даниила Старикова (v2.1.0)</div>
-        <div class="terminal-line">Введите <span class="terminal-output-success">help</span> для просмотра доступных команд.</div>
-        <div id="terminal-output-container"></div>
-        <div class="terminal-input-line">
-          <span class="terminal-prompt">straiko@portfolio:~$</span>
-          <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Ввод в терминал" />
-        </div>
+      <div class="metric-card">
+        <div class="metric-num">Type-Safe</div>
+        <div class="metric-label">Строгая типизация</div>
+        <div class="metric-sub">MyPy + Ruff в CI/CD пайплайне</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">CI/CD</div>
+        <div class="metric-label">Автосборка релизов</div>
+        <div class="metric-sub">Standalone бинарники и инсталляторы</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">Full-Cycle</div>
+        <div class="metric-label">От идеи до деплоя</div>
+        <div class="metric-sub">Архитектура, GUI, БД, API и дистрибуция</div>
+      </div>
+    </div>
+
+    <!-- Преимущества для работодателя -->
+    <div class="hiring-grid">
+      <div class="hiring-card">
+        <div class="hiring-icon">🎯</div>
+        <h3 class="hiring-card-title">Инженерная дисциплина</h3>
+        <p class="hiring-card-desc">
+          Не пишу спагетти-код «ради фичи». Проектирую расширяемую архитектуру, разделяю слои ответственности, документирую код и всегда закрываю функционал тестами.
+        </p>
+      </div>
+
+      <div class="hiring-card">
+        <div class="hiring-icon">⚡</div>
+        <h3 class="hiring-card-title">Решение реальных бизнес-задач</h3>
+        <p class="hiring-card-desc">
+          Опыт создания прикладных сервисов: OCR-сканирование штрих-кодов для логистики, Telegram-боты с интеграцией LLM, аудио-пайплайны и системные утилиты.
+        </p>
+      </div>
+
+      <div class="hiring-card">
+        <div class="hiring-icon">🔬</div>
+        <h3 class="hiring-card-title">Низкоуровневое понимание систем</h3>
+        <p class="hiring-card-desc">
+          Понимаю, как ОС и рантайм работают «под капотом»: глобальные системные хуки, работа с памятью и декомпиляция сборок через .NET Reflection.
+        </p>
+      </div>
+
+      <div class="hiring-card">
+        <div class="hiring-icon">🤝</div>
+        <h3 class="hiring-card-title">Быстрый онбординг и самостоятельность</h3>
+        <p class="hiring-card-desc">
+          Умею разбираться в закрытых API и чужих кодовых базах без лишних вопросов. Готов быстро погрузиться в процессы команды и выполнить тестовое задание.
+        </p>
+      </div>
+    </div>
+
+    <!-- Призыв к действию -->
+    <div class="hiring-cta">
+      <div class="hiring-cta-content">
+        <h3 class="hiring-cta-title">Ищете сильного разработчика в команду?</h3>
+        <p class="hiring-cta-desc">Готов обсудить задачи на Full-time (удаленно или гибрид в Москве).</p>
+      </div>
+      <div class="hiring-cta-buttons">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="cta-btn cta-btn-tg">
+          Написать в Telegram ↗
+        </a>
+        <a href={`${baseNoSlash}/ru/resume/`} class="cta-btn cta-btn-resume">
+          Посмотреть резюме
+        </a>
       </div>
     </div>
   </section>
@@ -217,9 +277,10 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-links">
+        <a href="https://t.me/Gram_vvallet" target="_blank" rel="noreferrer" class="footer-link">Telegram</a>
         <a href="https://github.com/Straiko" target="_blank" rel="noreferrer" class="footer-link">GitHub</a>
         <a href="mailto:Daniilstarikov2017@gmail.com" class="footer-link">Email</a>
-        <a href="https://github.com/Straiko?tab=repositories" target="_blank" rel="noreferrer" class="footer-link">Проекты</a>
+        <a href={`${baseNoSlash}/ru/resume/`} class="footer-link">Резюме</a>
       </div>
       <p class="footer-copy">© 2026 {profile.fullName}. Все права защищены.</p>
     </div>
@@ -240,79 +301,6 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       if (themeIcon) themeIcon.textContent = next === 'light' ? '🌙' : '☀️';
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const termInput = document.getElementById('terminal-input');
-      const termOutput = document.getElementById('terminal-output-container');
-      const termBody = document.getElementById('terminal-body');
-
-      function writeLine(text, className = '') {
-        const line = document.createElement('div');
-        line.className = 'terminal-line ' + className;
-        line.textContent = text;
-        termOutput.appendChild(line);
-        termBody.scrollTop = termBody.scrollHeight;
-      }
-
-      termInput?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const cmd = termInput.value.trim().toLowerCase();
-          termInput.value = '';
-          if (!cmd) return;
-
-          writeLine(`straiko@portfolio:~$ ${cmd}`, 'terminal-input-line');
-
-          switch (cmd) {
-            case 'help':
-              writeLine('Доступные команды:', 'terminal-output-accent');
-              writeLine('  about    - Информация о Данииле Старикове');
-              writeLine('  skills   - Список ключевых ИТ-компетенций');
-              writeLine('  projects - Обзор разработанных приложений');
-              writeLine('  blog     - Последние записи в блоге');
-              writeLine('  contact  - Контактные каналы связи');
-              writeLine('  clear    - Очистить лог терминала');
-              break;
-            case 'about':
-              writeLine('Имя: Даниил Стариков');
-              writeLine('Статус: Студент ИТ-специальности в МКАГ (Москва, Россия)');
-              writeLine('Цель: Разработка быстрых, современных и визуально совершенных приложений.');
-              break;
-            case 'skills':
-              writeLine('Ключевые ИТ-компетенции:', 'terminal-output-accent');
-              writeLine('  - Языки: Python, JavaScript, C++, C, PHP, Node.js');
-              writeLine('  - Веб-технологии: HTML, CSS, SQL, React.js, PHP Backend');
-              writeLine('  - Базы данных: SQL, Моделирование данных, Проектирование БД');
-              writeLine('  - Сети: Компьютерные сети, VLAN, Linux');
-              break;
-            case 'projects':
-              writeLine('Разработанные проекты:', 'terminal-output-accent');
-              writeLine('  [1] Olympus (fast_trans) - Desktop переводчик с AI');
-              writeLine('  [2] SHK Bot             - Telegram бот для сканирования');
-              writeLine('  [3] easy-php             - Коллекция PHP утилит');
-              writeLine('  [4] 2-work-52            - Практические задачи на JavaScript');
-              break;
-            case 'blog':
-              writeLine('Недавние статьи:', 'terminal-output-accent');
-              writeLine('  - Starting with Astro');
-              writeLine('  - Notes on learning');
-              writeLine('  - How I choose projects');
-              break;
-            case 'contact':
-              writeLine('Каналы связи:', 'terminal-output-accent');
-              writeLine('  Email: Daniilstarikov2017@gmail.com');
-              writeLine('  GitHub: https://github.com/Straiko');
-              break;
-            case 'clear':
-              termOutput.innerHTML = '';
-              break;
-            default:
-              writeLine(`Команда не найдена: "${cmd}". Введите "help" для списка команд.`, 'terminal-output-error');
-          }
-        }
-      });
-
-      document.querySelector('.terminal-window')?.addEventListener('click', () => termInput?.focus());
     });
   </script>
 </BaseLayout>
