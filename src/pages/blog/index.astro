@@ -13,12 +13,17 @@ const assetSrc = (src) => (src?.startsWith("/") ? withBase(src) : src);
 	<div class="min-h-screen">
 		<div class="blog-post">
 			<header class="post-header">
-				<a class="back-link" href={withBase("/")}>← Back to home</a>
+				<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+					<a class="back-link" style="margin-bottom: 0;" href={withBase("/")}>← Back to home</a>
+					<button id="themeToggle" class="nav-btn" aria-label="Toggle theme">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
 				<h1 class="post-title">Blog</h1>
 				<p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Notes, opinions, and small write-ups.</p>
 			</header>
 
-			<section style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem;">
+			<section style="border-top: 1px solid var(--border); padding-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem;">
 				{posts.map((post) => {
 					const slug = (post.slug ?? post.id).replace(/\.mdx?$/i, "");
 					return (

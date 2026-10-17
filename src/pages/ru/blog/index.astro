@@ -13,12 +13,17 @@ const assetSrc = (src) => (src?.startsWith("/") ? withBase(src) : src);
 	<div class="min-h-screen">
 		<div class="blog-post">
 			<header class="post-header">
-				<a class="back-link" href={withBase("/ru/")}>← Назад на главную</a>
+				<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+					<a class="back-link" style="margin-bottom: 0;" href={withBase("/ru/")}>← Назад на главную</a>
+					<button id="themeToggle" class="nav-btn" aria-label="Переключить тему">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
 				<h1 class="post-title">Блог</h1>
 				<p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Заметки, мнения и короткие тексты.</p>
 			</header>
 
-			<section style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem;">
+			<section style="border-top: 1px solid var(--border); padding-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem;">
 				{posts.map((post) => {
 					const slug = (post.slug ?? post.id).replace(/\.mdx?$/i, "");
 					return (

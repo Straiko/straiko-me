@@ -60,7 +60,7 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
     <a href={`${baseNoSlash}/`} class="nav-logo">straiko</a>
     <div class="nav-controls">
       <a href={`${baseNoSlash}/resume/`} class="nav-btn">Resume</a>
-      <a href={`${baseNoSlash}/ru/`} class="nav-btn">RU</a>
+      <a href={`${baseNoSlash}/ru/`} class="nav-btn" data-lang-switch="ru">RU</a>
       <button id="themeToggle" class="nav-btn" aria-label="Toggle theme">
         <span class="theme-icon">🌙</span>
       </button>
@@ -172,7 +172,7 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
       </div>
       <div class="blog-list">
         {blogPosts.map((post) => (
-          <a href={`${baseNoSlash}/blog/${post.slug}`} class="blog-item">
+          <a href={`${baseNoSlash}/blog/${post.slug}/`} class="blog-item">
             <div class="blog-item-header">
               <h3 class="blog-item-title">{post.title}</h3>
               <span class="blog-item-date">{post.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
@@ -288,29 +288,22 @@ const baseNoSlash = base.endsWith("/") ? base.slice(0, -1) : base;
 
   <script is:inline>
     (function() {
-      var saved = localStorage.getItem('lang');
-      if (saved) return;
-      var nav = navigator.language || navigator.userLanguage || '';
-      if (nav.toLowerCase().startsWith('ru')) {
-        var base = document.documentElement.getAttribute('data-base') || '';
-        window.location.replace(base + '/ru/');
-      }
+      try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('lang') === 'en') {
+          localStorage.setItem('lang', 'en');
+          return;
+        }
+
+        var saved = localStorage.getItem('lang');
+        if (saved === 'en') return;
+
+        var nav = navigator.language || navigator.userLanguage || '';
+        if (saved === 'ru' || (!saved && nav.toLowerCase().startsWith('ru'))) {
+          var base = document.documentElement.getAttribute('data-base') || '';
+          window.location.replace(base + '/ru/');
+        }
+      } catch (_) {}
     })();
-
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle?.querySelector('.theme-icon');
-    const html = document.documentElement;
-
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    html.setAttribute('data-theme', savedTheme);
-    if (themeIcon) themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
-
-    themeToggle?.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      if (themeIcon) themeIcon.textContent = next === 'light' ? '🌙' : '☀️';
-    });
   </script>
 </BaseLayout>

@@ -9,31 +9,45 @@ type Props = {
   image?: string;
 };
 
-const { title, description, lang = "ru", image } = Astro.props;
+const { title, description, lang, image } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
 const baseNoTrail = base.endsWith("/") ? base.slice(0, -1) : base;
-const withBase = (p) => `${baseNoTrail}${p}`;
+const withBase = (p: string) => `${baseNoTrail}${p}`;
 
 const pathname = Astro.url.pathname;
 const pathNoBase = baseNoTrail && pathname.startsWith(baseNoTrail) ? (pathname.slice(baseNoTrail.length) || "/") : pathname;
 
-const isEn = lang === "en" || pathNoBase.startsWith("/en");
-const otherLocalePathNoBase = isEn
-  ? pathNoBase.replace(/^\/en(\/|$)/, "/")
-  : pathNoBase === "/"
-    ? "/en/"
-    : `/en${pathNoBase}`;
-const otherLocalePath = withBase(otherLocalePathNoBase);
-const localeLabel = isEn ? "RU" : "EN";
+// Determine language strictly from prop or path
+const isRu = lang === "ru" || pathNoBase.startsWith("/ru");
+const isEn = !isRu;
+const pageLang = isEn ? "en" : "ru";
+
+// Compute reciprocal alternate URLs for SEO
+let enPathNoBase = "/";
+let ruPathNoBase = "/ru/";
+
+if (pathNoBase.startsWith("/ru/")) {
+  ruPathNoBase = pathNoBase;
+  enPathNoBase = pathNoBase.replace(/^\/ru\//, "/") || "/";
+} else if (pathNoBase === "/ru") {
+  ruPathNoBase = "/ru/";
+  enPathNoBase = "/";
+} else {
+  enPathNoBase = pathNoBase;
+  ruPathNoBase = pathNoBase === "/" ? "/ru/" : `/ru${pathNoBase.startsWith("/") ? pathNoBase : "/" + pathNoBase}`;
+}
 
 const siteUrl = Astro.site || "https://straiko.me";
 const canonicalURL = new URL(pathname, siteUrl).href;
+const enAlternateURL = new URL(withBase(enPathNoBase), siteUrl).href;
+const ruAlternateURL = new URL(withBase(ruPathNoBase), siteUrl).href;
+
 const ogImage = image || withBase("/og-image.jpg");
 const ogDescription = description || (isEn ? `${profile.tagline.en} · ${profile.subtitle.en}` : `${profile.tagline.ru} · ${profile.subtitle.ru}`);
 ---
 
-<html lang={isEn ? "en" : "ru"} data-base={baseNoTrail}>
+<html lang={pageLang} data-base={baseNoTrail}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
@@ -46,8 +60,11 @@ const ogDescription = description || (isEn ? `${profile.tagline.en} · ${profile
     <title>{title}</title>
     {description ? <meta name="description" content={description} /> : null}
 
-    <!-- Canonical URL -->
+    <!-- Canonical & Multilingual Alternates -->
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={enAlternateURL} />
+    <link rel="alternate" hreflang="ru" href={ruAlternateURL} />
+    <link rel="alternate" hreflang="x-default" href={enAlternateURL} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -67,8 +84,64 @@ const ogDescription = description || (isEn ? `${profile.tagline.en} · ${profile
     <!-- Additional SEO -->
     <meta name="author" content={profile.fullName} />
     <meta name="robots" content="index, follow" />
+
+    <!-- Immediate theme initialization to prevent Flash of Unstyled Content (FOUC) -->
+    <script is:inline>
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (_) {}
+      })();
+    </script>
   </head>
   <body>
     <slot />
+
+    <!-- Shared UI controls: Theme toggle and Language persistence -->
+    <script is:inline>
+      (function() {
+        function initThemeToggle() {
+          var toggleBtn = document.getElementById('themeToggle');
+          if (!toggleBtn) return;
+          var icon = toggleBtn.querySelector('.theme-icon');
+          var html = document.documentElement;
+          function updateIcon() {
+            var current = html.getAttribute('data-theme') || 'dark';
+            if (icon) icon.textContent = current === 'light' ? '🌙' : '☀️';
+          }
+          updateIcon();
+          toggleBtn.onclick = function() {
+            var current = html.getAttribute('data-theme') || 'dark';
+            var next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (_) {}
+            updateIcon();
+          };
+        }
+
+        function initLangSwitches() {
+          document.querySelectorAll('[data-lang-switch]').forEach(function(el) {
+            el.addEventListener('click', function() {
+              var targetLang = el.getAttribute('data-lang-switch');
+              if (targetLang) {
+                try { localStorage.setItem('lang', targetLang); } catch (_) {}
+              }
+            });
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            initThemeToggle();
+            initLangSwitches();
+          });
+        } else {
+          initThemeToggle();
+          initLangSwitches();
+        }
+      })();
+    </script>
   </body>
 </html>

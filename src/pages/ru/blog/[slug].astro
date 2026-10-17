@@ -22,7 +22,12 @@ const assetSrc = (src) => (src?.startsWith("/") ? withBase(src) : src);
 	<div class="min-h-screen">
 		<article class="blog-post">
 			<header class="post-header">
-				<a class="back-link" href={withBase("/ru/")}>← Назад на главную</a>
+				<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+					<a class="back-link" style="margin-bottom: 0;" href={withBase("/ru/")}>← Назад на главную</a>
+					<button id="themeToggle" class="nav-btn" aria-label="Переключить тему">
+						<span class="theme-icon">🌙</span>
+					</button>
+				</div>
 				<h1 class="post-title">{post.data.title}</h1>
 				<div class="post-meta">
 					<time datetime={post.data.pubDate.toISOString()}>
